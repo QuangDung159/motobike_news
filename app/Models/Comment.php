@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 26 Dec 2018 14:22:39 +0000.
+ * Date: Thu, 27 Dec 2018 13:49:14 +0000.
  */
 
 namespace App\Models;
@@ -26,6 +26,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Comment extends Eloquent
 {
+	protected $table = 'comment';
 	public $incrementing = false;
 
 	protected $fillable = [
