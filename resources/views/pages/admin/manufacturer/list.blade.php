@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Motorbike Type
+                    <h1 class="page-header">Manufacturer
                         <small>List</small>
                     </h1>
                 </div>
@@ -19,12 +19,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($list_motorbike_type as $motorbike_type_item)
+                    @foreach($list_manufacturer as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$motorbike_type_item->id}}</td>
-                            <td>{{$motorbike_type_item->name}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
+                                <a href="{{$URL_ADMIN_MANUFACTURER}}/delete/{{$item->id}}">
+                                    Delete
+                                </a>
+                            </td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i>
+                                <a href="{{$URL_ADMIN_MANUFACTURER}}/edit/{{$item->id}}">
+                                    Edit
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

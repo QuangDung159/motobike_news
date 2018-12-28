@@ -19,12 +19,16 @@ class Controller extends BaseController
         // Begin - Define constant to global using
         View::share("SUBMIT", "Submit");
         View::share("RESET", "Reset");
+
         View::share("LIST", "List");
         View::share("ADD", "Add");
         View::share("UPDATE", "Update");
         View::share("DELETE", "Delete");
+
         View::share("URL_ADMIN_ASSET", "asset/admin");
+
         View::share("URL_ADMIN_MOTORBIKE_TYPE", "admin/motorbike_type");
+        View::share("URL_ADMIN_MANUFACTURER", "admin/manufacturer");
 
         View::share("ADMIN", "admin");
 
