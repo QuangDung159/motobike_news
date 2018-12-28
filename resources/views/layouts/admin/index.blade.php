@@ -12,6 +12,12 @@
 <!-- /#wrapper -->
 @include("layouts.admin.footer")
 @yield("script")
+@yield("style")
+<style>
+    .notification {
+        margin-top: 1vh;
+    }
+</style>
 </body>
 
 </html>

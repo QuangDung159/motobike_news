@@ -4,6 +4,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
+                    <div class="notification">
+                        @if(session("success"))
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session("success")}}
+                            </div>
+                        @endif
+                    </div>
                     <h1 class="page-header">Motorbike Type
                         <small>List</small>
                     </h1>
@@ -23,8 +31,16 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$motorbike_type_item->id}}</td>
                             <td>{{$motorbike_type_item->name}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
+                                <a href="{{$URL_ADMIN_MOTORBIKE_TYPE."/delete/".$motorbike_type_item->id}}">
+                                    Delete
+                                </a>
+                            </td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i>
+                                <a href="{{$URL_ADMIN_MOTORBIKE_TYPE.'/update/'.$motorbike_type_item->id}}">
+                                    Edit
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

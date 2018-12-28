@@ -31,6 +31,9 @@ Route::group(
                 Route::get("list", $CONTROLLER_NAME . "@showList");
                 Route::get("add", $CONTROLLER_NAME . "@showAddPage");
                 Route::post("add", $CONTROLLER_NAME . "@makeAdd");
+                Route::get("update/{id_motorbike_type}", $CONTROLLER_NAME . "@showUpdatePage");
+                Route::post("update/{id_motorbike_type}", $CONTROLLER_NAME . "@makeUpdate");
+                Route::get("delete/{id_motorbike_type}", $CONTROLLER_NAME . "@makeDelete");
             }
         );
     }
