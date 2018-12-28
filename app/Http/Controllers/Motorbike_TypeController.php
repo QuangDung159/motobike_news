@@ -8,6 +8,8 @@ use App\Models\MotorbikeType;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\Rule;
 
+use App\Models\Entity;
+
 class Motorbike_TypeController extends Controller
 {
     private $DIRECTORY_PAGE_ADMIN_MOTORBIKE_TYPE = "pages.admin.motorbike_type";
@@ -15,12 +17,21 @@ class Motorbike_TypeController extends Controller
     private $URL_PAGE_ADMIN_MOTORBIKE_TYPE_LIST = "admin/motorbike_type/list";
     private $URL_PAGE_ADMIN_MOTORBIKE_TYPE_UPDATE = "admin/motorbike_type/update";
 
+    public $list = array([]);
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->list = Entity::all();
+    }
+
     public function showList()
     {
         $list_motorbike_type = MotorbikeType::all();
         return view($this->DIRECTORY_PAGE_ADMIN_MOTORBIKE_TYPE . ".list",
             [
-                "list_motorbike_type" => $list_motorbike_type
+                "list_motorbike_type" => $list_motorbike_type,
+                "list" => $this->list
             ]
         );
     }
