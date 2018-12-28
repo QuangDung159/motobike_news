@@ -27,8 +27,10 @@ Route::group(
                 "prefix" => "motorbike_type",
             ],
             function () {
-                Route::get("list", "Motorbike_TypeController@showList");
-                Route::get("add", "Motorbike_TypeController@showAddPage");
+                $CONTROLLER_NAME = "Motorbike_TypeController";
+                Route::get("list", $CONTROLLER_NAME . "@showList");
+                Route::get("add", $CONTROLLER_NAME . "@showAddPage");
+                Route::post("add", $CONTROLLER_NAME . "@makeAdd");
             }
         );
     }
