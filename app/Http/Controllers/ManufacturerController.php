@@ -98,13 +98,13 @@ class ManufacturerController extends Controller
 
     public function makeDelete($id_manufacturer)
     {
-        if (isset($id_manufacturer)) {
+        $manufacturer = Manufacturer::find($id_manufacturer);
+        if (!$manufacturer) {
             return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST);
         } else {
-            $manufacturer = Manufacturer::find($id_manufacturer);
             $manufacturer->delete();
             return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST)
-                ->with("success", $this->PATH_CONFIG_CONSTANT . ".success.delete_success");
+                ->with("success", Config::get($this->PATH_CONFIG_CONSTANT . ".success.delete_success"));
         }
     }
 }
