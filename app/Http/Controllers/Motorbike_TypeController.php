@@ -85,6 +85,7 @@ class Motorbike_TypeController extends Controller
                         "min:3",
                         "max:100",
                         // When you wish to ignore a given ID during the unique check
+                        // ignore(primaryKey)
                         Rule::unique("motorbike_type", "name")->ignore($id_motorbike_type)
                     ],
             ],

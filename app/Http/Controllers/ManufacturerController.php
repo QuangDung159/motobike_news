@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
 use App\Models\Manufacturer;
+use Illuminate\Validation\Rule;
 
 class ManufacturerController extends Controller
 {
@@ -57,5 +58,53 @@ class ManufacturerController extends Controller
         $manufacturer->save();
         return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_ADD)
             ->with("success", Config::get($this->PATH_CONFIG_CONSTANT . ".success.add_success"));
+    }
+
+    public function showUpdatePage($id_manufacturer)
+    {
+        $manufacturer = Manufacturer::find($id_manufacturer);
+        return view($this->DIRECTORY_PAGE_ADMIN_MANUFACTURER . ".update",
+            [
+                "manufacturer" => $manufacturer
+            ]
+        );
+    }
+
+    public function makeUpdateDate(Request $req, $id_manufacturer)
+    {
+        $manufacturer = Manufacturer::find($id_manufacturer);
+        $this->validate($req,
+            [
+                "manufacturer_name" =>
+                    [
+                        "required",
+                        "min:3",
+                        "max:100",
+                        Rule::unique("manufacturer", "name")->ignore($id_manufacturer)
+                    ]
+            ],
+            [
+                "manufacturer_name.required" => "Please provide Manufacturer name",
+                "manufacturer_name.min" => "The Manufacturer name is 3 to 100 characters long",
+                "manufacturer_name.max" => "The Manufacturer name is 3 to 100 characters long",
+                "manufacturer_name.unique" => "The Manufacturer name already exists"
+            ]
+        );
+        $manufacturer->name = $req->manufacturer_name;
+        $manufacturer->save();
+        return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_UPDATE . "/" . $id_manufacturer)
+            ->with("success", Config::get($this->PATH_CONFIG_CONSTANT . ".success.update_success"));
+    }
+
+    public function makeDelete($id_manufacturer)
+    {
+        if (isset($id_manufacturer)) {
+            return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST);
+        } else {
+            $manufacturer = Manufacturer::find($id_manufacturer);
+            $manufacturer->delete();
+            return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST)
+                ->with("success", $this->PATH_CONFIG_CONSTANT . ".success.delete_success");
+        }
     }
 }

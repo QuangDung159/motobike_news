@@ -29,7 +29,7 @@
                                 </a>
                             </td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i>
-                                <a href="{{$URL_ADMIN_MANUFACTURER}}/edit/{{$item->id}}">
+                                <a href="{{$URL_ADMIN_MANUFACTURER}}/update/{{$item->id}}">
                                     Edit
                                 </a>
                             </td>
