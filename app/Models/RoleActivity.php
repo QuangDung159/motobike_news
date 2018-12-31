@@ -11,28 +11,33 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class RoleActivity
- * 
+ *
  * @property string $id_role
  * @property string $id_activity
  * @property string $id_activity_entity
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * 
+ *
  * @property \App\Models\Role $role
  *
  * @package App\Models
  */
 class RoleActivity extends Eloquent
 {
-	protected $table = 'role_activity';
-	public $incrementing = false;
+    protected $table = 'role_activity';
+    public $incrementing = false;
 
-	protected $fillable = [
-		'id_activity_entity'
-	];
+    protected $fillable = [
+        'id_activity_entity'
+    ];
 
-	public function role()
-	{
-		return $this->belongsTo(\App\Models\Role::class, 'id_role');
-	}
+    public function role()
+    {
+        return $this->belongsTo(\App\Models\Role::class, 'id_role');
+    }
+
+    public function activity()
+    {
+        return $this->belongsTo(\App\Models\Activity::class, "id_activity");
+    }
 }

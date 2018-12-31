@@ -59,9 +59,11 @@ class RoleController extends Controller
     {
         $role = Role::find($id_role);
         if ($role) {
+            $list_role_activity = $role->role_activities;
             return view($this->DIRECTORY_PAGE_ADMIN_ROLE . ".update",
                 [
-                    "role" => $role
+                    "role" => $role,
+                    "list_role_activity" => $list_role_activity
                 ]
             );
         } else {

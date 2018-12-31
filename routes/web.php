@@ -78,5 +78,14 @@ Route::group(
                 Route::get("delete/{id_role}", $CONTROLLER_NAME . "makeDelete");
             }
         );
+        Route::group(
+            [
+                "prefix" => "policy"
+            ],
+            function () {
+                $CONTROLLER_NAME = "PolicyController";
+                Route::get("list", $CONTROLLER_NAME . "showList");
+            }
+        );
     }
 );
