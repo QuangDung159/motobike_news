@@ -26,9 +26,11 @@ class Controller extends BaseController
         View::share("DELETE", "Delete");
 
         View::share("URL_ADMIN_ASSET", "asset/admin");
+        View::share("IMAGES_PATH", "upload/images");
 
         View::share("URL_ADMIN_MOTORBIKE_TYPE", "admin/motorbike_type");
         View::share("URL_ADMIN_MANUFACTURER", "admin/manufacturer");
+        View::share("URL_ADMIN_MOTORBIKE", "admin/motorbike");
 
         View::share("ADMIN", "admin");
 

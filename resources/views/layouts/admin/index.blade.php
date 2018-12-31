@@ -17,6 +17,12 @@
     .notification {
         margin-top: 1vh;
     }
+
+    .preview-img {
+        width: 200px;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+    }
 </style>
 </body>
 

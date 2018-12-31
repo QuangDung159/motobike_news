@@ -10,7 +10,7 @@
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="admin/motorbike_type/add" method="POST">
+                    <form action="{{$URL_ADMIN_MOTORIKE_TYPE}}/add" method="POST">
                         {{csrf_field()}}
                         <div class="notification">
                             @if(session("success"))

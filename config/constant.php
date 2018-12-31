@@ -10,5 +10,10 @@ return [
         "add_success" => "Add successfully",
         "update_success" => "Update successfully",
         "delete_success" => "Delete successfully"
+    ],
+    [
+        "error" => [
+            "invalid_file_type" => "Invalid file type. Please upload the file have format : jpg, png, jpeg"
+        ]
     ]
 ];

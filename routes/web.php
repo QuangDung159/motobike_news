@@ -50,5 +50,16 @@ Route::group(
                 Route::get("delete/{id_manufacturer}", $CONTROLLER_NAME . "makeDelete");
             }
         );
+        Route::group(
+            [
+                "prefix" => "motorbike"
+            ],
+            function () {
+                $CONTROLLER_NAME = "MotorbikeController@";
+                Route::get("list", $CONTROLLER_NAME . "showList");
+                Route::get("add", $CONTROLLER_NAME . "showAddPage");
+                Route::post("add", $CONTROLLER_NAME . "makeAdd");
+            }
+        );
     }
 );
