@@ -20,7 +20,7 @@
                             </div>
                         @endif
                     </div>
-                    <h1 class="page-header">Motorbike
+                    <h1 class="page-header">Role
                         <small>List</small>
                     </h1>
                 </div>
@@ -30,32 +30,20 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Capacity (cc)</th>
-                        <th>Motorbike Type</th>
-                        <th>Manufacturer</th>
-                        <th>Thumbnail</th>
-                        <th>Unsigned Title</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($list_motorbike as $motorbike_item)
+                    @foreach($list_role as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$motorbike_item->id}}</td>
-                            <td>{{$motorbike_item->name}}</td>
-                            <td>{{$motorbike_item->capacity}}</td>
-                            <td>{{$motorbike_item->motorbike_type->name}}</td>
-                            <td>{{$motorbike_item->manufacturer->name}}</td>
-                            <td>
-                                <img width="150px" src="{{$IMAGES_PATH}}/motorbike/{{$motorbike_item->thumbnail}}"/>
-                            </td>
-                            <td>{{$motorbike_item->unsigned_title}}</td>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
-                                <a href="{{$URL_ADMIN_MOTORBIKE}}/{{$DELETE}}/{{$motorbike_item->id}}"> Delete</a>
+                                <a href="{{$URL_ADMIN_ROLE}}/{{$DELETE}}/{{$item->id}}"> Delete</a>
                             </td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i>
-                                <a href="{{$URL_ADMIN_MOTORBIKE}}/{{$UPDATE}}/{{$motorbike_item->id}}">Edit</a>
+                                <a href="{{$URL_ADMIN_ROLE}}/{{$UPDATE}}/{{$item->id}}">Edit</a>
                             </td>
                         </tr>
                     @endforeach

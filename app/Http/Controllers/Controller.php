@@ -31,6 +31,7 @@ class Controller extends BaseController
         View::share("URL_ADMIN_MOTORBIKE_TYPE", "admin/motorbike_type");
         View::share("URL_ADMIN_MANUFACTURER", "admin/manufacturer");
         View::share("URL_ADMIN_MOTORBIKE", "admin/motorbike");
+        View::share("URL_ADMIN_ROLE", "admin/role");
 
         View::share("ADMIN", "admin");
 
