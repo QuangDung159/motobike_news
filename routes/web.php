@@ -87,6 +87,7 @@ Route::group(
                 Route::get("list", $CONTROLLER_NAME . "showList");
                 Route::get("add", $CONTROLLER_NAME . "showAddPage");
                 Route::post("add", $CONTROLLER_NAME . "makeAdd");
+                Route::get("update", $CONTROLLER_NAME . "showUpdatePage");
             }
         );
     }

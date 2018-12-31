@@ -61,17 +61,14 @@ class PolicyController extends Controller
             ]
         );
 
-        $policy = Policy::all();
-        echo count($policy);
-        die();
-        if ($policy) {
-            echo "false";
-            die();
+        $policy = Policy::where("id_role", $req->id_role)
+            ->where("id_entity", $req->id_entity)
+            ->where("id_activity", $req->id_activity)->get();
+        if (count($policy) > 0) {
             return redirect($this->URL_PAGE_ADMIN_POLICY_ADD)
                 ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.add_error"));
         } else {
-            echo "true";
-            die();
+            $policy = new Policy();
             $policy->id_role = $req->id_role;
             $policy->id_activity = $req->id_activity;
             $policy->id_entity = $req->id_entity;
