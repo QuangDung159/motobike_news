@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Motorbike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
@@ -70,7 +71,7 @@ class ManufacturerController extends Controller
         );
     }
 
-    public function makeUpdateDate(Request $req, $id_manufacturer)
+    public function makeUpdate(Request $req, $id_manufacturer)
     {
         $manufacturer = Manufacturer::find($id_manufacturer);
         $this->validate($req,
@@ -102,9 +103,15 @@ class ManufacturerController extends Controller
         if (!$manufacturer) {
             return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST);
         } else {
-            $manufacturer->delete();
-            return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST)
-                ->with("success", Config::get($this->PATH_CONFIG_CONSTANT . ".success.delete_success"));
+            $list_motorbike = $manufacturer->motorbikes;
+            if (count($list_motorbike) > 0) {
+                return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST)
+                    ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.delete_error"));
+            } else {
+                $manufacturer->delete();
+                return redirect($this->URL_PAGE_ADMIN_MANUFACTURER_LIST)
+                    ->with("success", Config::get($this->PATH_CONFIG_CONSTANT . ".success.delete_success"));
+            }
         }
     }
 }

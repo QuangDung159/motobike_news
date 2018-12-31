@@ -9,11 +9,13 @@ return [
     "success" => [
         "add_success" => "Add successfully",
         "update_success" => "Update successfully",
-        "delete_success" => "Delete successfully"
+        "delete_success" => "Delete successfully",
+        "delete_error" => "Violation of foreign key"
     ],
     [
         "error" => [
-            "invalid_file_type" => "Invalid file type. Please upload the file have format : jpg, png, jpeg"
+            "invalid_file_type" => "Invalid file type. Please upload the file have format : jpg, png, jpeg",
+            "delete_error" => "Violation of foreign key"
         ]
     ]
 ];

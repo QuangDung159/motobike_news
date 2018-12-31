@@ -17,6 +17,8 @@ class Motorbike_TypeController extends Controller
     private $URL_PAGE_ADMIN_MOTORBIKE_TYPE_LIST = "admin/motorbike_type/list";
     private $URL_PAGE_ADMIN_MOTORBIKE_TYPE_UPDATE = "admin/motorbike_type/update";
 
+    private $PATH_CONFIG_CONSTANT = "constant";
+
     public $list = array([]);
 
     public function __construct()
@@ -109,9 +111,15 @@ class Motorbike_TypeController extends Controller
             return redirect($this->URL_PAGE_ADMIN_MOTORBIKE_TYPE_LIST);
         } else {
             $motorbike_type = MotorbikeType::find($id_motorbike_type);
-            $motorbike_type->delete();
-            return redirect($this->URL_PAGE_ADMIN_MOTORBIKE_TYPE_LIST)
-                ->with("success", Config::get("constant.success.delete_success"));
+            $list_motorbike = $motorbike_type->motorbikes;
+            if (count($list_motorbike) > 0) {
+                return redirect($this->URL_PAGE_ADMIN_MOTORBIKE_TYPE_LIST)
+                    ->with("error", config($this->PATH_CONFIG_CONSTANT . ".success.delete_error"));
+            } else {
+                $motorbike_type->delete();
+                return redirect($this->URL_PAGE_ADMIN_MOTORBIKE_TYPE_LIST)
+                    ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.delete_success"));
+            }
         }
     }
 }

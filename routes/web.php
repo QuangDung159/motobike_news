@@ -46,7 +46,7 @@ Route::group(
                 Route::get("add", $CONTROLLER_NAME . "showAddPage");
                 Route::post("add", $CONTROLLER_NAME . "makeAdd");
                 Route::get("update/{id_manufacturer}", $CONTROLLER_NAME . "showUpdatePage");
-                Route::post("update/{id_manufacturer}", $CONTROLLER_NAME . "makeUpdateDate");
+                Route::post("update/{id_manufacturer}", $CONTROLLER_NAME . "makeUpdate");
                 Route::get("delete/{id_manufacturer}", $CONTROLLER_NAME . "makeDelete");
             }
         );
@@ -59,6 +59,9 @@ Route::group(
                 Route::get("list", $CONTROLLER_NAME . "showList");
                 Route::get("add", $CONTROLLER_NAME . "showAddPage");
                 Route::post("add", $CONTROLLER_NAME . "makeAdd");
+                Route::get("update/{id_motorbike}", $CONTROLLER_NAME . "showUpdatePage");
+                Route::post("update/{id_motorbike}", $CONTROLLER_NAME . "makeUpdate");
+                Route::get("delete/{id_motorbike}", $CONTROLLER_NAME . "makeDelete");
             }
         );
     }
