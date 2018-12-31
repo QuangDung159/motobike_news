@@ -83,8 +83,10 @@ Route::group(
                 "prefix" => "policy"
             ],
             function () {
-                $CONTROLLER_NAME = "PolicyController";
+                $CONTROLLER_NAME = "PolicyController@";
                 Route::get("list", $CONTROLLER_NAME . "showList");
+                Route::get("add", $CONTROLLER_NAME . "showAddPage");
+                Route::post("add", $CONTROLLER_NAME . "makeAdd");
             }
         );
     }

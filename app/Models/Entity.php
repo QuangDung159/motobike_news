@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 27 Dec 2018 13:49:14 +0000.
+ * Date: Mon, 31 Dec 2018 13:25:25 +0000.
  */
 
 namespace App\Models;
@@ -14,10 +14,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property string $id
  * @property string $name
+ * @property string $alias
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
- * @property \Illuminate\Database\Eloquent\Collection $activities
+ * @property \Illuminate\Database\Eloquent\Collection $policies
  *
  * @package App\Models
  */
@@ -27,12 +28,12 @@ class Entity extends Eloquent
 	public $incrementing = false;
 
 	protected $fillable = [
-		'name'
+		'name',
+		'alias'
 	];
 
-	public function activities()
+	public function policies()
 	{
-		return $this->belongsToMany(\App\Models\Activity::class, 'activity_entity', 'id_entity', 'id_activity')
-					->withTimestamps();
+		return $this->hasMany(\App\Models\Policy::class, 'id_entity');
 	}
 }

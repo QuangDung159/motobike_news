@@ -15,7 +15,8 @@ return [
     [
         "error" => [
             "invalid_file_type" => "Invalid file type. Please upload the file have format : jpg, png, jpeg",
-            "delete_error" => "Violation of foreign key"
+            "delete_error" => "Violation of foreign key",
+            "add_error" => "Policy already exist"
         ]
     ]
 ];
