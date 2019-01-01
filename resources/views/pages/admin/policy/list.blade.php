@@ -20,7 +20,7 @@
                             </div>
                         @endif
                     </div>
-                    <h1 class="page-header">Motorbike
+                    <h1 class="page-header">Policy
                         <small>List</small>
                     </h1>
                 </div>
@@ -42,12 +42,12 @@
                             <td>{{$item->activity->name}}</td>
                             <td>{{$item->entity->name}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
-                                <a href="{{$URL_ADMIN_POLICY}}/{{$DELETE}}/{{$item->id_role}}/{{$item->id_activity}}/{{$item->id_entity}}">
+                                <a href="{{$URL_ADMIN_POLICY}}/{{$DELETE}}/{{$item->id}}">
                                     Delete
                                 </a>
                             </td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i>
-                                <a href="{{$URL_ADMIN_POLICY}}/{{$UPDATE}}/{{$item->id_role}}/{{$item->id_activity}}/{{$item->id_entity}}">
+                                <a href="{{$URL_ADMIN_POLICY}}/{{$UPDATE}}/{{$item->id}}">
                                     Edit
                                 </a>
                             </td>

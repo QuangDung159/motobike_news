@@ -77,4 +77,60 @@ class PolicyController extends Controller
                 ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.add_success"));
         }
     }
+
+    public function showUpdatePage($id)
+    {
+        $policy = Policy::where("id", $id)->get();
+        if (count($policy) > 0) {
+            $list_entity = Entity::all();
+            $list_activity = Activity::all();
+            $list_role = Role::all();
+            return view($this->DIRECTORY_PAGE_ADMIN_POLICY . ".update",
+                [
+                    "policy" => $policy[0],
+                    "list_entity" => $list_entity,
+                    "list_activity" => $list_activity,
+                    "list_role" => $list_role
+                ]
+            );
+        } else {
+            return redirect($this->URL_PAGE_ADMIN_POLICY_LIST);
+        }
+    }
+
+    public function makeUpdate(Request $req, $id)
+    {
+        $this->validate($req,
+            [
+                "id_role" => "required",
+                "id_activity" => "required",
+                "id_entity" => "required"
+            ],
+            [
+                "id_role.required" => "Please provide Role",
+                "id_activity.required" => "Please provide Activity",
+                "id_entity.required" => "Please provide Entity"
+            ]
+        );
+        $policy = Policy::where("id", $id)->get();
+        $other_policy = Policy::where("id_role", $req->id_role)
+            ->where("id_activity", $req->id_activity)
+            ->where("id_entity", $req->id_entity)->get();
+        if (count($other_policy) > 0) {
+            if ($other_policy[0]->id == $id) {
+                return redirect($this->URL_PAGE_ADMIN_POLICY_UPDATE . "/" . $id)
+                    ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.update_success"));
+            } else {
+                return redirect($this->URL_PAGE_ADMIN_POLICY_UPDATE . "/" . $id)
+                    ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.update_error"));
+            }
+        } else {
+            $policy[0]->id_role = $req->id_role;
+            $policy[0]->id_activity = $req->id_activity;
+            $policy[0]->id_entity = $req->id_entity;
+            $policy[0]->save();
+            return redirect($this->URL_PAGE_ADMIN_POLICY_UPDATE . "/" . $id)
+                ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.update_success"));
+        }
+    }
 }

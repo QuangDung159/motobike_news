@@ -87,7 +87,17 @@ Route::group(
                 Route::get("list", $CONTROLLER_NAME . "showList");
                 Route::get("add", $CONTROLLER_NAME . "showAddPage");
                 Route::post("add", $CONTROLLER_NAME . "makeAdd");
-                Route::get("update", $CONTROLLER_NAME . "showUpdatePage");
+                Route::get("update/{id}", $CONTROLLER_NAME . "showUpdatePage");
+                Route::post("update/{id}", $CONTROLLER_NAME . "makeUpdate");
+            }
+        );
+        Route::group(
+            [
+                "prefix" => "user"
+            ],
+            function () {
+                $CONTROLLER_NAME = "UserController@";
+                Route::get("list", $CONTROLLER_NAME . "showList");
             }
         );
     }
