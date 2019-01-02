@@ -69,6 +69,7 @@ class PolicyController extends Controller
                 ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.add_error"));
         } else {
             $policy = new Policy();
+            $policy->id = str_random(5);
             $policy->id_role = $req->id_role;
             $policy->id_activity = $req->id_activity;
             $policy->id_entity = $req->id_entity;
@@ -132,5 +133,19 @@ class PolicyController extends Controller
             return redirect($this->URL_PAGE_ADMIN_POLICY_UPDATE . "/" . $id)
                 ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.update_success"));
         }
+    }
+
+    public function makeDelete($id)
+    {
+        $policy = Policy::where("id", $id)->get();
+        if (count($policy) > 0) {
+            $policy[0]->delete();
+            return redirect($this->URL_PAGE_ADMIN_POLICY_LIST)
+                ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.delete_success"));
+        } else {
+            return redirect($this->URL_PAGE_ADMIN_POLICY_LIST)
+                ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.delete_error"));
+        }
+
     }
 }

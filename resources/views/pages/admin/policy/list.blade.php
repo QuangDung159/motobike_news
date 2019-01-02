@@ -11,6 +11,12 @@
                                 {{session("success")}}
                             </div>
                         @endif
+                        @if(session("error"))
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session("error")}}
+                            </div>
+                        @endif
                         @if(count($errors) > 0)
                             <div class="alert alert-danger alert-dismissable">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

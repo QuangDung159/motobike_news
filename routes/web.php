@@ -89,6 +89,7 @@ Route::group(
                 Route::post("add", $CONTROLLER_NAME . "makeAdd");
                 Route::get("update/{id}", $CONTROLLER_NAME . "showUpdatePage");
                 Route::post("update/{id}", $CONTROLLER_NAME . "makeUpdate");
+                Route::get("delete/{id}", $CONTROLLER_NAME . "makeDelete");
             }
         );
         Route::group(
