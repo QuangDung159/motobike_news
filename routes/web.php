@@ -99,6 +99,8 @@ Route::group(
             function () {
                 $CONTROLLER_NAME = "UserController@";
                 Route::get("list", $CONTROLLER_NAME . "showList");
+                Route::get("add", $CONTROLLER_NAME . "showAddPage");
+                Route::post("add", $CONTROLLER_NAME . "makeAdd");
             }
         );
     }
