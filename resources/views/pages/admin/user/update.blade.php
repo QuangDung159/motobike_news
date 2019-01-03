@@ -4,47 +4,74 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category
-                        <small>Edit</small>
+                    <h1 class="page-header">User
+                        <small>{{$user->name}}</small>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
+                    <form action="{{$URL_ADMIN_USER}}/update/{{$user->id}}" method="POST">
+                        {{csrf_field()}}
+                        <div class="notification">
+                            @if(session("success"))
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{session("success")}}
+                                </div>
+                            @endif
+                            @if(session("error"))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{session("error")}}
+                                </div>
+                            @endif
+                            @if(count($errors) > 0)
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    @foreach($errors->all() as $item)
+                                        {{$item}}<br>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                         <div class="form-group">
-                            <label>Category Parent</label>
-                            <select class="form-control">
-                                <option value="0">Please Choose Category</option>
-                                <option value="">Tin Tức</option>
+                            <label>Name</label>
+                            <input class="form-control" name="user_name"
+                                   placeholder="Please enter User name"
+                                   value="{{$user->name}}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control" name="user_email"
+                                   placeholder="Please enter User email"
+                                   value="{{$user->email}}"/>
+                        </div>
+                        {{--<div class="form-group">--}}
+                        {{--<label>Password</label>--}}
+                        {{--<input class="form-control" name="password" type="password"--}}
+                        {{--placeholder="Please enter Password"/>--}}
+                        {{--</div>--}}
+                        <div class="form-group">
+                            <label>Birthday</label>
+                            <input class="form-control" name="user_dob" type="date"
+                                   value="{{$dob}}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Activity</label>
+                            <select class="form-control" name="id_role">
+                                <option value="0">Please Choose Role</option>
+                                @foreach($list_role as $item)
+                                    <option
+                                            @if($user->id_role == $item->id)
+                                            {{"selected"}}
+                                            @endif
+                                            value="{{$item->id}}">{{$item->name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Category Name</label>
-                            <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Order</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Order"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Keywords</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Description</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Status</label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="1" checked="" type="radio">Visible
-                            </label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="2" type="radio">Invisible
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Category Edit</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
+                        <button type="submit" class="btn btn-default">{{$SUBMIT}}</button>
+                        <button type="reset" class="btn btn-default">{{$RESET}}</button>
                     </form>
                 </div>
             </div>

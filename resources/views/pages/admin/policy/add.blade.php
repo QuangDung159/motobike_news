@@ -22,7 +22,7 @@
                             @if(session("error"))
                                 <div class="alert alert-danger alert-dismissible">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    {{session("success")}}
+                                    {{session("error")}}
                                 </div>
                             @endif
                             @if(count($errors) > 0)

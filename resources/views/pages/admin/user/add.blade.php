@@ -22,7 +22,7 @@
                             @if(session("error"))
                                 <div class="alert alert-danger alert-dismissible">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    {{session("success")}}
+                                    {{session("error")}}
                                 </div>
                             @endif
                             @if(count($errors) > 0)
@@ -50,7 +50,7 @@
                                    placeholder="Please enter Password"/>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
+                            <label>Birthday</label>
                             <input class="form-control" name="user_dob" type="date"/>
                         </div>
                         <div class="form-group">

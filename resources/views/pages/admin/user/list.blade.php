@@ -14,7 +14,7 @@
                         @if(session("error"))
                             <div class="alert alert-danger alert-dismissible">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{session("success")}}
+                                {{session("error")}}
                             </div>
                         @endif
                         @if(count($errors) > 0)
@@ -50,10 +50,10 @@
                             <td>{{$item->name}}</td>
                             <td>{{$item->email}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
-                                <a href="{{$URL_ADMIN_ROLE}}/{{$DELETE}}/{{$item->id}}"> Delete</a>
+                                <a href="{{$URL_ADMIN_USER}}/{{$DELETE}}/{{$item->id}}"> Delete</a>
                             </td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i>
-                                <a href="{{$URL_ADMIN_ROLE}}/{{$UPDATE}}/{{$item->id}}">Edit</a>
+                                <a href="{{$URL_ADMIN_USER}}/{{$UPDATE}}/{{$item->id}}">Edit</a>
                             </td>
                         </tr>
                     @endforeach
