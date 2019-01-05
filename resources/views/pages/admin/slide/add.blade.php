@@ -10,41 +10,33 @@
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {{csrf_field()}}
                         <div class="form-group">
-                            <label>Category Parent</label>
-                            <select class="form-control">
-                                <option value="0">Please Choose Category</option>
-                                <option value="">Tin Tức</option>
-                            </select>
+                            <label>Slide Name</label>
+                            <input class="form-control" name="slide_name" placeholder="Please Enter Slide Name"/>
                         </div>
                         <div class="form-group">
-                            <label>Category Name</label>
-                            <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name"/>
+                            <label>Slide Link</label>
+                            <input class="form-control" name="slide_link" placeholder="Please Enter Slide Link"/>
                         </div>
-                        <div class="form-group">
-                            <label>Category Order</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Order"/>
+                        @if(session("invalid_type"))
+                            <div class="alert alert-danger">
+                                {{session("invalid_type")}}
+                            </div>
+                        @endif
+                        <img id="preview_upload_img" class="preview-img">
+                        <div class="form-group" name="thumbnail">
+                            {{-- thêm thuộc tính enctype="multipart/form-data" ở <form> --}}
+                            <label>Preview</label>
+                            <input
+                                    name="thumbnail"
+                                    type="file" class="form-control"
+                                    id="thumbnail"
+                            >
                         </div>
-                        <div class="form-group">
-                            <label>Category Keywords</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Description</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Category Status</label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="1" checked="" type="radio">Visible
-                            </label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="2" type="radio">Invisible
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Category Add</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
+                        <button type="submit" class="btn btn-default">{{$SUBMIT}}</button>
+                        <button type="reset" class="btn btn-default">{{$RESET}}</button>
                     </form>
                 </div>
             </div>
@@ -52,4 +44,37 @@
         </div>
         <!-- /.container-fluid -->
     </div>
+@endsection
+
+@section("script")
+    <script>
+        {{-- get path of file that you want to upload --}}
+        function readPath(input) {
+            // get file path
+            var filePath = input.value;
+            // define allow ext
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+                alert("Please upload the file have format : jpg, png, jpeg");
+                input.value = '';
+                return false;
+            }
+            // check you input have file
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                // get file fullpath
+                reader.onload = function (e) {
+                    // <img> id
+                    $('#preview_upload_img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        // trigger readPath function by onchange event
+        $('#thumbnail').change(function () {
+                readPath(this)
+            }
+        );
+    </script>
 @endsection

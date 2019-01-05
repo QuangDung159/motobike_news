@@ -4,7 +4,29 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Policy
+                    <div class="notification">
+                        @if(session("success"))
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session("success")}}
+                            </div>
+                        @endif
+                        @if(session("error"))
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session("error")}}
+                            </div>
+                        @endif
+                        @if(count($errors) > 0)
+                            <div class="alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @foreach($errors->all() as $item)
+                                    {{$item}}<br>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                    <h1 class="page-header">Slide
                         <small>List</small>
                     </h1>
                 </div>
@@ -14,15 +36,21 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Preview</th>
+                        <th>Link</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($list_motorbike_type as $motorbike_type_item)
+                    @foreach($list_slide as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$motorbike_type_item->id}}</td>
-                            <td>{{$motorbike_type_item->name}}</td>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>
+                                <img width="150px" src="{{$IMAGES_PATH}}/slide/{{$item->path}}"/>
+                            </td>
+                            <td>{{$item->link}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
                         </tr>
