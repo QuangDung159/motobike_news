@@ -120,5 +120,19 @@ Route::group(
                 Route::get("delete/{id_slide}", $CONTROLLER_NAME . "makeDelete");
             }
         );
+        Route::group(
+            [
+                "prefix" => "comment"
+            ],
+            function () {
+                $CONTROLLER_NAME = "CommentController@";
+                Route::get("list", $CONTROLLER_NAME . "showList");
+//                Route::get("add", $CONTROLLER_NAME . "showAddPage");
+//                Route::post("add", $CONTROLLER_NAME . "makeAdd");
+//                Route::get("update/{id_slide}", $CONTROLLER_NAME . "showUpdatePage");
+//                Route::post("update/{id_slide}", $CONTROLLER_NAME . "makeUpdate");
+//                Route::get("delete/{id_slide}", $CONTROLLER_NAME . "makeDelete");
+            }
+        );
     }
 );

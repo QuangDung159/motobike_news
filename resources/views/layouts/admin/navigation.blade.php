@@ -53,12 +53,14 @@
                         <a href="#"><i class="fa fa-users fa-fw"></i> {{$entity->name}}<span
                                     class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            @if($entity->name != "Comment")
+                                <li>
+                                    {{-- admin/motorbike_type/add --}}
+                                    <a href="{{$ADMIN}}/{{$entity->alias}}/{{$ADD}}">Add {{$entity->name}}</a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{$ADMIN}}/{{$entity->alias}}/{{$LIST}}">List {{$entity->name}}</a>
-                            </li>
-                            <li>
-                                {{-- admin/motorbike_type/add --}}
-                                <a href="{{$ADMIN}}/{{$entity->alias}}/{{$ADD}}">Add {{$entity->name}}</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
