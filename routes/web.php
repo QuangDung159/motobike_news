@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::group(
     [
         "prefix" => "admin",
+        "middleware" => "PolicyMiddleware"
     ],
     function () {
         Route::group(
@@ -136,3 +137,5 @@ Route::group(
         );
     }
 );
+
+Route::get("admin/login", "UserController@showLogin");

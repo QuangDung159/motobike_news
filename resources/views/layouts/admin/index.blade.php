@@ -3,9 +3,12 @@
 <div id="wrapper">
 
     <!-- Navigation -->
-@include("layouts.admin.navigation")
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        @include("layouts.admin.navigation")
+        @include("layouts.admin.menu")
+    </nav>
 
-<!-- Page Content -->
+    <!-- Page Content -->
 @yield("content")
 <!-- /#page-wrapper -->
 </div>

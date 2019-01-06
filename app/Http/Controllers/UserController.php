@@ -19,6 +19,8 @@ class UserController extends Controller
     private $URL_PAGE_ADMIN_USER_UPDATE = "admin/user/update";
     private $UPLOAD_PATH = "upload/images/";
 
+    private $DIRECTORY_PAGE_ADMIN_LOGIN = "pages.admin.login";
+
     private $PATH_CONFIG_CONSTANT = "constant";
 
     public function showList()
@@ -177,5 +179,10 @@ class UserController extends Controller
             return redirect($this->URL_PAGE_ADMIN_USER_LIST)
                 ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.delete_error"));
         }
+    }
+
+    public function showLogin()
+    {
+        return view("pages.admin.login");
     }
 }
