@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category
+                    <h1 class="page-header">Slide
                         <small>Add</small>
                     </h1>
                 </div>
@@ -12,6 +12,28 @@
                 <div class="col-lg-7" style="padding-bottom:120px">
                     <form action="" method="POST" enctype="multipart/form-data">
                         {{csrf_field()}}
+                        <div class="notification">
+                            @if(session("success"))
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{session("success")}}
+                                </div>
+                            @endif
+                            @if(session("error"))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{session("error")}}
+                                </div>
+                            @endif
+                            @if(count($errors) > 0)
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    @foreach($errors->all() as $item)
+                                        {{$item}}<br>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label>Slide Name</label>
                             <input class="form-control" name="slide_name" placeholder="Please Enter Slide Name"/>

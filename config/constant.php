@@ -14,6 +14,7 @@ return [
     "error" => [
         "delete_error" => "Delete fail",
         "update_error" => "Update fail",
-        "add_error" => "Add fail"
+        "add_error" => "Add fail",
+        "invalid_file_type" => "Invalid file type"
     ]
 ];

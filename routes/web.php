@@ -115,9 +115,9 @@ Route::group(
                 Route::get("list", $CONTROLLER_NAME . "showList");
                 Route::get("add", $CONTROLLER_NAME . "showAddPage");
                 Route::post("add", $CONTROLLER_NAME . "makeAdd");
-                Route::get("update/{id}", $CONTROLLER_NAME . "showUpdatePage");
-                Route::post("update/{id}", $CONTROLLER_NAME . "makeUpdate");
-                Route::get("delete/{id}", $CONTROLLER_NAME . "makeDelete");
+                Route::get("update/{id_slide}", $CONTROLLER_NAME . "showUpdatePage");
+                Route::post("update/{id_slide}", $CONTROLLER_NAME . "makeUpdate");
+                Route::get("delete/{id_slide}", $CONTROLLER_NAME . "makeDelete");
             }
         );
     }

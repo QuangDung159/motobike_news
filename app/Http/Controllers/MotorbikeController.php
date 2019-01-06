@@ -22,6 +22,8 @@ class MotorbikeController extends Controller
 
     private $PATH_CONFIG_CONSTANT = "constant";
 
+    private $PATH_DEFAULT = "no-image.jpg";
+
     public function showList()
     {
         $list_motorbike = Motorbike::all();
@@ -94,7 +96,7 @@ class MotorbikeController extends Controller
             } else {
                 $file_name = $file->getClientOriginalName();
                 $file_name_to_save = str_random(10) . $file_name;
-                while (file_exists($this->UPLOAD_PATH . $file_name_to_save)) {
+                while (file_exists($this->UPLOAD_PATH . "/" . $file_name_to_save)) {
                     $file_name_to_save = $file_name . str_random(10);
                 }
                 $file->move($this->UPLOAD_PATH, $file_name_to_save);
@@ -183,7 +185,9 @@ class MotorbikeController extends Controller
                     while (file_exists($this->UPLOAD_PATH . "/" . $file_name_to_save)) {
                         $file_name_to_save = str_random(10) . $file_name;
                     }
-                    unlink($this->UPLOAD_PATH . "/" . $motorbike->thumbnail);
+                    if ($motorbike->thumbnail != $this->PATH_DEFAULT) {
+                        unlink($this->UPLOAD_PATH . "/" . $motorbike->thumbnail);
+                    }
                     $motorbike->thumbnail = $file_name_to_save;
                     $file->move($this->UPLOAD_PATH, $file_name_to_save);
                 }
@@ -201,6 +205,9 @@ class MotorbikeController extends Controller
         $motorbike = Motorbike::find($id_motorbike);
         if ($motorbike) {
             $motorbike->delete();
+            if ($motorbike->thumbnail != $this->PATH_DEFAULT) {
+                unlink($this->UPLOAD_PATH . "/" . $motorbike->thumbnail);
+            }
             return redirect($this->URL_PAGE_ADMIN_MOTORBIKE_LIST)
                 ->with("success", Config::get($this->PATH_CONFIG_CONSTANT . ".success.delete_success"));
         } else {

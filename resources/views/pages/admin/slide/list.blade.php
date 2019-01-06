@@ -51,8 +51,10 @@
                                 <img width="150px" src="{{$IMAGES_PATH}}/slide/{{$item->path}}"/>
                             </td>
                             <td>{{$item->link}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a
+                                        href="{{$URL_ADMIN_SLIDE}}/{{$DELETE}}/{{$item->id}}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a
+                                        href="{{$URL_ADMIN_SLIDE}}/{{$UPDATE}}/{{$item->id}}">Edit</a></td>
                         </tr>
                     @endforeach
                     </tbody>

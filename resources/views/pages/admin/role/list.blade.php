@@ -46,7 +46,7 @@
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
-                                <a href="{{$URL_ADMIN_ROLE}}/{{$DELETE}}/{{$item->id}}"> Delete</a>
+                                <a href="{{$URL_ADMIN_ROLE}}/{{$DELETE}}/{{$item->id}}">Delete</a>
                             </td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i>
                                 <a href="{{$URL_ADMIN_ROLE}}/{{$UPDATE}}/{{$item->id}}">Edit</a>
