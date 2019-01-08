@@ -6,7 +6,9 @@ use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -89,7 +91,7 @@ class UserController extends Controller
         $user->id_role = $req->id_role;
         $user->id = str_random(5);
         $user->name = $req->user_name;
-        $user->email = $req->user_name;
+        $user->email = $req->user_email;
         $user->password = bcrypt($req->password);
         $user->dob = $req->user_dob;
         $user->save();
@@ -184,5 +186,36 @@ class UserController extends Controller
     public function showLogin()
     {
         return view("pages.admin.login");
+    }
+
+    public function makeLogin(Request $req)
+    {
+        $this->validate($req,
+            [
+                "email" => "required",
+                "password" => "required",
+            ],
+            [
+                "email.required" => "Please provide your email",
+
+                "password.required" => "Please provide your passwords"
+            ]
+        );
+
+        $credentials = $req->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            echo "login success";
+            $this->getListEntity();
+            return redirect("admin/motorbike/list");
+        } else {
+            return redirect("admin/login")
+                ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.login_fail"));
+        }
+    }
+
+    public function makeLogout()
+    {
+        Auth::logout();
+        return redirect("admin/login");
     }
 }

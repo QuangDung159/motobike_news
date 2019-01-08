@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 use App\Models\Entity;
@@ -42,6 +43,8 @@ class Controller extends BaseController
         View::share("ADD", "add");
         View::share("UPDATE", "update");
         View::share("DELETE", "delete");
+
+        View::share("URL_ADMIN_LOGOUT", "admin/logout");
         // End - Define constant to global using
 
         $this->getListEntity();
@@ -51,5 +54,10 @@ class Controller extends BaseController
     {
         $list_entity = Entity::all();
         View::share("list_entity", $list_entity);
+        if (Auth::check()) {
+            echo "success";
+        } else {
+            echo "false";
+        }
     }
 }

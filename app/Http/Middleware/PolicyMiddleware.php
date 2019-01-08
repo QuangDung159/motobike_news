@@ -33,7 +33,7 @@ class PolicyMiddleware
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->role == 1) {
+            if ($user->id_role == 1) {
                 return $next($request);
             } else {
                 return redirect("admin/login")

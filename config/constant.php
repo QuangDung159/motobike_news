@@ -18,7 +18,8 @@ return [
             "update_error" => "Update fail",
             "add_error" => "Add fail",
             "invalid_file_type" => "Invalid file type",
-            "wrong_login" => "Login fail! Please check your login information"
+            "wrong_login" => "Login fail! Please check your login information",
+            "login_fail" => "Login fail"
         ],
     "notification" =>
         [

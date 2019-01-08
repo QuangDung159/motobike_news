@@ -24,6 +24,11 @@ class MotorbikeController extends Controller
 
     private $PATH_DEFAULT = "no-image.jpg";
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function showList()
     {
         $list_motorbike = Motorbike::all();
