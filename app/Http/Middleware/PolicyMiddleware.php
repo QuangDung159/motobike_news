@@ -2,8 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Entity;
+use App\Models\Policy;
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+use MongoDB\Driver\Query;
 
 class PolicyMiddleware
 {
@@ -33,7 +38,12 @@ class PolicyMiddleware
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->id_role == 1) {
+            View::share("current_user", $user);
+            if ($user->id_role != 4) {
+                $list_entity = DB::select("select DISTINCT(id_entity), e.* from policy p, entity e where p.id_role = "
+                    . $user->id_role
+                    . " and e.id = p.id_entity");
+                View::share("list_entity", $list_entity);
                 return $next($request);
             } else {
                 return redirect("admin/login")

@@ -45,19 +45,7 @@ class Controller extends BaseController
         View::share("DELETE", "delete");
 
         View::share("URL_ADMIN_LOGOUT", "admin/logout");
+        View::share("URL_ADMIN_LOGIN", "admin/login");
         // End - Define constant to global using
-
-        $this->getListEntity();
-    }
-
-    function getListEntity()
-    {
-        $list_entity = Entity::all();
-        View::share("list_entity", $list_entity);
-        if (Auth::check()) {
-            echo "success";
-        } else {
-            echo "false";
-        }
     }
 }

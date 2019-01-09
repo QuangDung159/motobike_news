@@ -204,8 +204,6 @@ class UserController extends Controller
 
         $credentials = $req->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            echo "login success";
-            $this->getListEntity();
             return redirect("admin/motorbike/list");
         } else {
             return redirect("admin/login")

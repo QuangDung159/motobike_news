@@ -16,16 +16,22 @@
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
-            <li>
-                <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="{{$URL_ADMIN_LOGOUT}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-            </li>
+            @if(isset($current_user))
+                <li>
+                    <a href="#"><i class="fa fa-user fa-fw"></i> {{$current_user->name}}</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="{{$URL_ADMIN_LOGOUT}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            @else
+                <li>
+                    <a href="{{$URL_ADMIN_LOGIN}}"><i class="fa fa-gear fa-fw"></i> Login</a>
+                </li>
+            @endif
         </ul>
         <!-- /.dropdown-user -->
     </li>

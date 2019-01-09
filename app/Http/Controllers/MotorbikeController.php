@@ -6,6 +6,7 @@ use App\Models\Manufacturer;
 use App\Models\Motorbike;
 use App\Models\MotorbikeType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\Rule;
 
@@ -23,11 +24,6 @@ class MotorbikeController extends Controller
     private $PATH_CONFIG_CONSTANT = "constant";
 
     private $PATH_DEFAULT = "no-image.jpg";
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function showList()
     {
