@@ -14,11 +14,15 @@ class UserController extends Controller
 {
     // use for view()
     private $DIRECTORY_PAGE_ADMIN_USER = "pages.admin.user";
+    private $DIRECTORY_PAGE_ADMIN_DASHBOARD = "pages.admin.dashboard";
 
     // use for redirect()
     private $URL_PAGE_ADMIN_USER_ADD = "admin/user/add";
     private $URL_PAGE_ADMIN_USER_LIST = "admin/user/list";
     private $URL_PAGE_ADMIN_USER_UPDATE = "admin/user/update";
+    private $URL_PAGE_ADMIN_DASHBOARD = "admin/dashboard";
+    private $URL_PAGE_ADMIN_LOGIN = "admin/login";
+
     private $UPLOAD_PATH = "upload/images/";
 
     private $DIRECTORY_PAGE_ADMIN_LOGIN = "pages.admin.login";
@@ -204,9 +208,9 @@ class UserController extends Controller
 
         $credentials = $req->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect("admin/motorbike/list");
+            return redirect($this->URL_PAGE_ADMIN_DASHBOARD);
         } else {
-            return redirect("admin/login")
+            return redirect($this->URL_PAGE_ADMIN_LOGIN)
                 ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.login_fail"));
         }
     }
@@ -214,6 +218,11 @@ class UserController extends Controller
     public function makeLogout()
     {
         Auth::logout();
-        return redirect("admin/login");
+        return redirect($this->URL_PAGE_ADMIN_LOGIN);
+    }
+
+    public function showDashboard()
+    {
+        return view($this->DIRECTORY_PAGE_ADMIN_DASHBOARD);
     }
 }

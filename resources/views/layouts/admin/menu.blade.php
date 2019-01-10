@@ -13,7 +13,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="{{$URL_ADMIN_DASHBOARD}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             @foreach($list_entity as $entity)
                 <li>

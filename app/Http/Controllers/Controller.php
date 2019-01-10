@@ -46,6 +46,7 @@ class Controller extends BaseController
 
         View::share("URL_ADMIN_LOGOUT", "admin/logout");
         View::share("URL_ADMIN_LOGIN", "admin/login");
+        View::share("URL_ADMIN_DASHBOARD", "admin/dashboard");
         // End - Define constant to global using
     }
 }

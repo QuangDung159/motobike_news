@@ -21,12 +21,14 @@ class PolicyMiddleware
      */
 
     // use for view()
-    private $DIRECTORY_PAGE_ADMIN_SLIDE = "pages.admin.slide";
+//    private $DIRECTORY_PAGE_ADMIN_SLIDE = "pages.admin.slide";
+//    private $DIRECTORY_PAGE_ADMIN_DASHBOARD = "pages.admin.dashboard";
 
     // use for redirect()
-    private $URL_PAGE_ADMIN_SLIDE_ADD = "admin/slide/add";
-    private $URL_PAGE_ADMIN_SLIDE_LIST = "admin/slide/list";
-    private $URL_PAGE_ADMIN_SLIDE_UPDATE = "admin/slide/update";
+//    private $URL_PAGE_ADMIN_SLIDE_ADD = "admin/slide/add";
+//    private $URL_PAGE_ADMIN_SLIDE_LIST = "admin/slide/list";
+//    private $URL_PAGE_ADMIN_SLIDE_UPDATE = "admin/slide/update";
+    private $URL_PAGE_ADMIN_DASHBOARD = "admin/dashboard";
 
     private $UPLOAD_PATH = "upload/images/slide";
 
@@ -44,7 +46,17 @@ class PolicyMiddleware
                     . $user->id_role
                     . " and e.id = p.id_entity");
                 View::share("list_entity", $list_entity);
-                return $next($request);
+                foreach ($list_entity as $entity) {
+                    // url : http://localhost:8090/motobike_news/public/admin/slide/list
+                    // Check whether the segment (slide) belongs to the entity list or not
+                    // Dashboard isn't belongs to entity list -> this is exception -> bypass
+                    if ($entity->alias == $request->segment(2) || $request->segment(2) == "dashboard") {
+                        return $next($request);
+                    } else {
+                        return redirect($this->URL_PAGE_ADMIN_DASHBOARD)
+                            ->with("notification", config($this->PATH_CONFIG_CONSTANT . ".notification.no_permission"));
+                    }
+                }
             } else {
                 return redirect("admin/login")
                     ->with("notification", config($this->PATH_CONFIG_CONSTANT . ".notification.not_permission"));

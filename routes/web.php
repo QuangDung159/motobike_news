@@ -23,6 +23,8 @@ Route::group(
         "middleware" => "policy"
     ],
     function () {
+        Route::get("dashboard", "UserController@showDashboard");
+        Route::get("logout", "UserController@makeLogout");
         Route::group(
             [
                 "prefix" => "motorbike_type",
@@ -140,6 +142,5 @@ Route::group(
 
 Route::get("admin/login", "UserController@showLogin");
 Route::post("admin/login", "UserController@makeLogin");
-Route::get("admin/logout", "UserController@makeLogout");
 
 Auth::routes();
