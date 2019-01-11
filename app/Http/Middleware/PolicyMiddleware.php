@@ -51,7 +51,20 @@ class PolicyMiddleware
                     // Check whether the segment (slide) belongs to the entity list or not
                     // Dashboard isn't belongs to entity list -> this is exception -> bypass
                     if ($entity->alias == $request->segment(2) || $request->segment(2) == "dashboard") {
-                        return $next($request);
+
+                        // Get list activity by id_role, id_entity
+                        $list_activity = DB::select("SELECT r.name as role_name, e.name as entity_name, a.name as acitvity_name 
+                                                      FROM policy p, entity e, activity a, role r 
+                                                      WHERE p.id_activity = a.id and p.id_entity = e.id 
+                                                      and p.id_role = r.id and p.id_role = " . $user->id_role . " and p.id_entity = " . $entity->id);
+                        print_r($list_activity);
+                        echo $request->segment(3);
+                        // Check segment(3) - exp:add - belongs to lst activity or not
+                        foreach ($list_activity as $activity) {
+                            if (strtolower($activity->acitvity_name) == strtolower($request->segment(3)) || $request->segment(2) == "dashboard") {
+                                return $next($request);
+                            }
+                        }
                     } else {
                         return redirect($this->URL_PAGE_ADMIN_DASHBOARD)
                             ->with("notification", config($this->PATH_CONFIG_CONSTANT . ".notification.no_permission"));
@@ -67,3 +80,8 @@ class PolicyMiddleware
         }
     }
 }
+
+
+//SELECT r.name as role_name, e.name as entity_name, a.name as acitvity_name FROM policy p, entity e, activity a, role r WHERE p.id_activity = a.id and p.id_entity = e.id and p.id_role = r.id and p.id_role = 1 and p.id_activity = 1 and p.id_entity = 1
+//
+//SELECT r.name as role_name, e.name as entity_name, a.name as acitvity_name FROM policy p, entity e, activity a, role r WHERE p.id_activity = a.id and p.id_entity = e.id and p.id_role = r.id and p.id_role = 1 and p.id_entity = 1
