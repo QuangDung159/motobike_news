@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Policy;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 
@@ -107,7 +109,7 @@ class UserController extends Controller
     {
         $user = User::where("id", $id)->get();
         $list_role = Role::all();
-        if (count($user[0]) > 0) {
+        if (count($user) > 0) {
             return view($this->DIRECTORY_PAGE_ADMIN_USER . ".update",
                 [
                     "dob" => $user[0]->dob->format("Y-m-d"),
@@ -224,5 +226,20 @@ class UserController extends Controller
     public function showDashboard()
     {
         return view($this->DIRECTORY_PAGE_ADMIN_DASHBOARD);
+    }
+
+    public function showListPolicyByUser($id_user)
+    {
+        Log::info("showListPolicyByUser");
+        $user = User::find($id_user);
+        $role_name = Role::find($user->id_role)->name;
+        Log::info("ID Role : " . $user->id_role);
+        $list_policy = Policy::where("id_role", $user->id_role)->get();
+        return view($this->DIRECTORY_PAGE_ADMIN_USER . ".policy",
+            [
+                "list_policy" => $list_policy,
+                "role_name" => $role_name
+            ]
+        );
     }
 }

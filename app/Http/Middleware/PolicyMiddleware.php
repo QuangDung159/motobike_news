@@ -52,23 +52,30 @@ class PolicyMiddleware
 
                     // url : http://localhost:8090/motobike_news/public/admin/slide/list
                     // Check whether the segment(3) - slide - belongs to the entity list or not
+
                     // Dashboard isn't belongs to entity list -> this is exception -> bypass
                     if ($request->segment(2) == "dashboard") {
                         return $next($request);
-                    } else {
-                        if ($entity->alias == $request->segment(2)) {
+                    }
 
-                            // Get list activity by id_role, id_entity
-                            $list_activity = DB::select("SELECT r.name as role_name, e.name as entity_name, a.name as acitvity_name 
+                    // Info isn't belongs to entity list -> this is exception -> bypass
+                    if ($request->segment(2) == "info") {
+                        return $next($request);
+                    }
+                    if ($entity->alias == $request->segment(2)) {
+
+                        // Get list activity by id_role, id_entity
+                        $list_activity = DB::select("SELECT r.name as role_name, e.name as entity_name, a.name as acitvity_name 
                                                       FROM policy p, entity e, activity a, role r 
                                                       WHERE p.id_activity = a.id and p.id_entity = e.id 
                                                       and p.id_role = r.id and p.id_role = " . $user->id_role . " and p.id_entity = " . $entity->id);
-                            foreach ($list_activity as $activity) {
-                                if (strtolower($activity->acitvity_name) == strtolower($request->segment(3))) {
-                                    return $next($request);
-                                }
+                        Log::info(strtolower($request->segment(3)));
+                        foreach ($list_activity as $activity) {
+                            if (strtolower($activity->acitvity_name) == strtolower($request->segment(3))) {
+                                return $next($request);
                             }
                         }
+
                     }
                 }
                 return redirect($this->URL_PAGE_ADMIN_DASHBOARD)

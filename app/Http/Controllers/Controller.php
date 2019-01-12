@@ -36,6 +36,7 @@ class Controller extends BaseController
         View::share("URL_ADMIN_POLICY", "admin/policy");
         View::share("URL_ADMIN_USER", "admin/user");
         View::share("URL_ADMIN_SLIDE", "admin/slide");
+        View::share("URL_ADMIN_INFO", "admin/info");
 
         View::share("ADMIN", "admin");
 

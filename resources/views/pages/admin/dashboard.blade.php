@@ -7,7 +7,9 @@
                 @if(session("notification"))
                     <div class="alert alert-danger alert-dismissible">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{session("notification")}}
+                        {{session("notification")}}<a href="{{$URL_ADMIN_INFO}}/policy/{{$current_user->id}}"> See
+                            detail.
+                        </a>
                     </div>
                 @endif
             </div>
