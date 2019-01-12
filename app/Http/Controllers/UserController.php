@@ -283,21 +283,80 @@ class UserController extends Controller
                     "re_password.same" => "The Re-Password does not match with New Password"
                 ]
             );
-            Log::info("Current Password : " . $user->password);
             if (Hash::check($req->current_password, $user->password)) {
                 $user->password = bcrypt($req->new_password);
                 $user->save();
-                Log::info("Status : Success");
                 return redirect($this->URL_PAGE_ADMIN_INFO . "/change_password/" . $id_user)
                     ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.update_success"));
             } else {
-                Log::info("Status : Wrong Password");
                 return redirect($this->URL_PAGE_ADMIN_INFO . "/change_password/" . $id_user)
                     ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.wrong_current_password"));
             }
         } else {
-            Log::info("Status : Wrong User");
+            return redirect($this->URL_PAGE_ADMIN_INFO . "/change_password/" . $id_user)
+                ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.update_error"));
+        }
+    }
+
+    public function showChangeInfoPage($id_user)
+    {
+        Log::info("showChangeInfoPage");
+        $user = User::find($id_user);
+        if ($user) {
+            return view($this->DIRECTORY_PAGE_ADMIN_USER . ".change_info",
+                [
+                    "dob" => $user->dob->format("Y-m-d"),
+                ]
+            );
+        } else {
             return redirect($this->URL_PAGE_ADMIN_DASHBOARD);
+        }
+    }
+
+    public function makeChangeInfo($id_user, Request $req)
+    {
+        Log::info("makeChangeInfo");
+        $user = User::find($id_user);
+        if ($user) {
+            $this->validate($req,
+                [
+                    "user_name" =>
+                        [
+                            "required",
+                            "max:100",
+                            "min:3"
+                        ],
+                    "user_email" =>
+                        [
+                            "required",
+                            "max:100",
+                            "min:3",
+                            Rule::unique("user", "email")->ignore($user->email, "email")
+                        ],
+                    "user_dob" => "required"
+                ],
+                [
+                    "user_name.required" => "Please provide User name",
+                    "user_name.min" => "The user name is 3 to 100 characters long",
+                    "user_name.max" => "The user name is 3 to 100 characters long",
+
+                    "user_email.required" => "Please provide User email",
+                    "user_email.min" => "The user email is 3 to 100 characters long",
+                    "user_email.max" => "The user email is 3 to 100 characters long",
+                    "user_email.unique" => "The User email already exists",
+
+                    "user_dob.required" => "Please provide User birthday"
+                ]
+            );
+            $user->name = $req->user_name;
+            $user->email = $req->user_email;
+            $user->dob = $req->user_dob;
+            $user->save();
+            return redirect($this->URL_PAGE_ADMIN_INFO . "/change_info/" . $id_user)
+                ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.update_success"));
+        } else {
+            return redirect($this->URL_PAGE_ADMIN_INFO . "/change_info/" . $id_user)
+                ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.update_error"));
         }
     }
 }

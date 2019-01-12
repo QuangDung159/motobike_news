@@ -52,7 +52,7 @@
                             class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="{{$URL_ADMIN_INFO}}/policy/{{$current_user->id}}">Change Information</a>
+                        <a href="{{$URL_ADMIN_INFO}}/change_info/{{$current_user->id}}">Change Information</a>
                     </li>
                     <li>
                         <a href="{{$URL_ADMIN_INFO}}/change_password/{{$current_user->id}}">Change Password</a>
