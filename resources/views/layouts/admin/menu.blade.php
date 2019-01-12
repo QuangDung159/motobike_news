@@ -60,9 +60,6 @@
                     <li>
                         <a href="{{$URL_ADMIN_INFO}}/policy/{{$current_user->id}}">Policy</a>
                     </li>
-                    <li>
-                        <a href="{{$URL_ADMIN_INFO}}/policy/{{$current_user->id}}">Make Request</a>
-                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
