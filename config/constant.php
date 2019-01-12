@@ -19,7 +19,8 @@ return [
             "add_error" => "Add fail",
             "invalid_file_type" => "Invalid file type",
             "wrong_login" => "Login fail! Please check your login information",
-            "login_fail" => "Login fail"
+            "login_fail" => "Login fail",
+            "wrong_current_password" => "Current Password does not match"
         ],
     "notification" =>
         [

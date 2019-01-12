@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
@@ -22,6 +23,7 @@ class UserController extends Controller
     private $URL_PAGE_ADMIN_USER_ADD = "admin/user/add";
     private $URL_PAGE_ADMIN_USER_LIST = "admin/user/list";
     private $URL_PAGE_ADMIN_USER_UPDATE = "admin/user/update";
+    private $URL_PAGE_ADMIN_INFO = "admin/info";
     private $URL_PAGE_ADMIN_DASHBOARD = "admin/dashboard";
     private $URL_PAGE_ADMIN_LOGIN = "admin/login";
 
@@ -232,14 +234,70 @@ class UserController extends Controller
     {
         Log::info("showListPolicyByUser");
         $user = User::find($id_user);
-        $role_name = Role::find($user->id_role)->name;
-        Log::info("ID Role : " . $user->id_role);
-        $list_policy = Policy::where("id_role", $user->id_role)->get();
-        return view($this->DIRECTORY_PAGE_ADMIN_USER . ".policy",
-            [
-                "list_policy" => $list_policy,
-                "role_name" => $role_name
-            ]
-        );
+        if ($user) {
+            $role_name = Role::find($user->id_role)->name;
+            Log::info("ID Role : " . $user->id_role);
+            $list_policy = Policy::where("id_role", $user->id_role)->get();
+            return view($this->DIRECTORY_PAGE_ADMIN_USER . ".policy",
+                [
+                    "list_policy" => $list_policy,
+                    "role_name" => $role_name
+                ]
+            );
+        } else {
+            return redirect($this->URL_PAGE_ADMIN_DASHBOARD);
+        }
+    }
+
+    public function showChangePasswordPages($id_user)
+    {
+        $user = User::find($id_user);
+        if ($user) {
+            return view($this->DIRECTORY_PAGE_ADMIN_USER . ".change_password");
+        } else {
+            return redirect($this->URL_PAGE_ADMIN_DASHBOARD);
+        }
+    }
+
+    public function makeChangePassword($id_user, Request $req)
+    {
+        Log::info("makeChangePassword");
+        $user = User::find($id_user);
+        if ($user) {
+            $this->validate($req,
+                [
+                    "current_password" => "required",
+                    "new_password" => "required|max:20|min:3",
+                    "re_password" => "required|max:20|min:3|same:new_password"
+                ],
+                [
+                    "current_password.required" => "Please provide your Current Password",
+
+                    "new_password.required" => "Please provide your New Password",
+                    "new_password.max" => "The New Password is 3 to 20 characters long",
+                    "new_password.min" => "The New Password is 3 to 20 characters long",
+
+                    "re_password.required" => "Please provide your Re-Password",
+                    "re_password.max" => "The Re-Password is 3 to 20 characters long",
+                    "re_password.min" => "The Re-Password is 3 to 20 characters long",
+                    "re_password.same" => "The Re-Password does not match with New Password"
+                ]
+            );
+            Log::info("Current Password : " . $user->password);
+            if (Hash::check($req->current_password, $user->password)) {
+                $user->password = bcrypt($req->new_password);
+                $user->save();
+                Log::info("Status : Success");
+                return redirect($this->URL_PAGE_ADMIN_INFO . "/change_password/" . $id_user)
+                    ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.update_success"));
+            } else {
+                Log::info("Status : Wrong Password");
+                return redirect($this->URL_PAGE_ADMIN_INFO . "/change_password/" . $id_user)
+                    ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.wrong_current_password"));
+            }
+        } else {
+            Log::info("Status : Wrong User");
+            return redirect($this->URL_PAGE_ADMIN_DASHBOARD);
+        }
     }
 }

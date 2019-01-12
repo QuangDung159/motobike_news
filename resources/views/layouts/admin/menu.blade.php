@@ -47,6 +47,25 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <li>
+                <a href="#"><i class="fa fa-users fa-fw"></i> Setting<span
+                            class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{$URL_ADMIN_INFO}}/policy/{{$current_user->id}}">Change Information</a>
+                    </li>
+                    <li>
+                        <a href="{{$URL_ADMIN_INFO}}/change_password/{{$current_user->id}}">Change Password</a>
+                    </li>
+                    <li>
+                        <a href="{{$URL_ADMIN_INFO}}/policy/{{$current_user->id}}">Policy</a>
+                    </li>
+                    <li>
+                        <a href="{{$URL_ADMIN_INFO}}/policy/{{$current_user->id}}">Make Request</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

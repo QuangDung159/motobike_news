@@ -39,7 +39,6 @@ class PolicyMiddleware
 
     public function handle($request, Closure $next)
     {
-        Log::info("------------------------------------------------------------------------------------------------------------------------------");
         if (Auth::check()) {
             $user = Auth::user();
             View::share("current_user", $user);

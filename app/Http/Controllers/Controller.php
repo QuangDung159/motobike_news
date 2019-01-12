@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 use App\Models\Entity;
@@ -17,6 +18,7 @@ class Controller extends BaseController
 
     function __construct()
     {
+        Log::info("----------------------------------------------");
         // Begin - Define constant to global using
         View::share("SUBMIT", "Submit");
         View::share("RESET", "Reset");

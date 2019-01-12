@@ -138,6 +138,8 @@ Route::group(
             function () {
                 $CONTROLLER_NAME = "UserController@";
                 Route::get("policy/{id_user}", $CONTROLLER_NAME . "showListPolicyByUser");
+                Route::get("change_password/{id_user}", $CONTROLLER_NAME . "showChangePasswordPages");
+                Route::post("change_password/{id_user}", $CONTROLLER_NAME . "makeChangePassword");
             }
         );
     }
