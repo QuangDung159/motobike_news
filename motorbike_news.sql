@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 31, 2018 lúc 01:24 PM
--- Phiên bản máy phục vụ: 10.1.37-MariaDB
--- Phiên bản PHP: 7.2.12
+-- Thời gian đã tạo: Th1 12, 2019 lúc 06:48 AM
+-- Phiên bản máy phục vụ: 10.1.36-MariaDB
+-- Phiên bản PHP: 5.6.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,53 +40,10 @@ CREATE TABLE `activity` (
 --
 
 INSERT INTO `activity` (`id`, `name`, `created_at`, `updated_at`) VALUES
-('1', 'Create', '2018-12-27 12:40:35', '0000-00-00 00:00:00'),
+('1', 'Add', '2019-01-11 13:31:18', '0000-00-00 00:00:00'),
 ('2', 'Update', '2018-12-27 12:40:35', '0000-00-00 00:00:00'),
-('3', 'Read', '2018-12-27 12:40:35', '0000-00-00 00:00:00'),
+('3', 'List', '2019-01-11 13:31:12', '0000-00-00 00:00:00'),
 ('4', 'Delete', '2018-12-27 12:40:35', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `activity_entity`
---
-
-CREATE TABLE `activity_entity` (
-  `id_activity` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `id_entity` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `activity_entity`
---
-
-INSERT INTO `activity_entity` (`id_activity`, `id_entity`, `created_at`, `updated_at`) VALUES
-('1', '1', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('1', '2', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('1', '3', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('1', '4', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('1', '5', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('1', '6', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('2', '1', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('2', '2', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('2', '3', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('2', '4', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('2', '5', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('2', '6', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('3', '1', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('3', '2', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('3', '3', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('3', '4', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('3', '5', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('3', '6', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('4', '1', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('4', '2', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('4', '3', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('4', '4', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('4', '5', '2018-12-27 13:45:07', '0000-00-00 00:00:00'),
-('4', '6', '2018-12-27 13:45:07', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -221,6 +178,55 @@ INSERT INTO `motorbike_type` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `policy`
+--
+
+CREATE TABLE `policy` (
+  `id_role` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `id_activity` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `id_entity` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `policy`
+--
+
+INSERT INTO `policy` (`id_role`, `id_activity`, `id_entity`, `id`, `created_at`, `updated_at`) VALUES
+('1', '1', '1', '1', '2019-01-01 06:35:29', '0000-00-00 00:00:00'),
+('1', '1', '2', '2', '2019-01-01 06:35:29', '0000-00-00 00:00:00'),
+('1', '1', '3', '3', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '1', '4', '4', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '1', '5', '5', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '1', '6', '6', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '2', '1', '8', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '2', '2', '9', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '2', '3', '0', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '2', '4', '11', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '2', '5', '12', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '2', '6', '13', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '2', '7', '14', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '3', '1', '15', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '3', '2', '16', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '3', '3', '17', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '3', '4', '18', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '3', '5', '19', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '3', '6', '20', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '3', '7', '21', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '4', '1', '22', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '4', '2', '23', '2019-01-01 06:35:30', '0000-00-00 00:00:00'),
+('1', '4', '3', '24', '2019-01-01 06:35:31', '0000-00-00 00:00:00'),
+('1', '4', '4', '25', '2019-01-01 06:35:31', '0000-00-00 00:00:00'),
+('1', '4', '5', '26', '2019-01-01 06:35:31', '0000-00-00 00:00:00'),
+('2', '1', '1', 'nlVgK', '2019-01-09 06:36:44', '2019-01-09 06:36:44'),
+('2', '1', '2', 'U2lZI', '2019-01-09 06:36:51', '2019-01-09 06:36:51'),
+('3', '1', '1', 'OZr7x', '2019-01-09 06:36:59', '2019-01-09 06:36:59');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `role`
 --
 
@@ -238,31 +244,8 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `name`, `created_at`, `updated_at`) VALUES
 ('1', 'SysAdmin', '2018-12-27 12:38:54', '0000-00-00 00:00:00'),
 ('2', 'Colaborator', '2018-12-27 12:38:54', '0000-00-00 00:00:00'),
-('3', 'Admin', '2018-12-27 12:38:54', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `role_activity`
---
-
-CREATE TABLE `role_activity` (
-  `id_role` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `id_activity` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `id_activity_entity` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `role_activity`
---
-
-INSERT INTO `role_activity` (`id_role`, `id_activity`, `id_activity_entity`, `created_at`, `updated_at`) VALUES
-('1', '1', '', '2018-12-27 13:09:46', '0000-00-00 00:00:00'),
-('1', '2', '', '2018-12-27 13:09:46', '0000-00-00 00:00:00'),
-('1', '3', '', '2018-12-27 13:09:46', '0000-00-00 00:00:00'),
-('1', '4', '', '2018-12-27 13:09:46', '0000-00-00 00:00:00');
+('3', 'Admin', '2018-12-27 12:38:54', '0000-00-00 00:00:00'),
+('4', 'User', '2019-01-09 13:34:30', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -284,8 +267,11 @@ CREATE TABLE `slide` (
 --
 
 INSERT INTO `slide` (`id`, `name`, `path`, `link`, `created_at`, `updated_at`) VALUES
-('1', 'No slide 1', 'related_post_no_available_image.png', 'google.com', '2018-12-27 13:26:18', '0000-00-00 00:00:00'),
-('2', 'No slide 2', 'related_post_no_available_image.png', 'google.com', '2018-12-27 13:26:18', '0000-00-00 00:00:00');
+('1', 'r1 1', 'WeVfCWvY81img.jpg', 'google.com', '2019-01-06 07:34:37', '2019-01-06 00:34:37'),
+('2', 'r1 2', 'yD0q83jmbaimg (1).jpg', 'google.com', '2019-01-06 07:40:43', '2019-01-06 00:40:43'),
+('gxeHD', 'Ducati 1', '9DSz01CyqdPanigale-959Corse-MY18-Red-40-Slider-Gallery-906x510.jpg', 'https://www.ducati.com/us/en/bikes/panigale/959-panigale', '2019-01-05 23:59:23', '2019-01-05 23:59:23'),
+('hDQal', 'gsx r1000 1', 'Qb7BvaFHA5gimg17.jpg', 'https://www.ducati.com/us/en/bikes/panigale/959-panigale', '2019-01-05 23:59:07', '2019-01-05 23:59:07'),
+('RHLpF', 'Ducati 2', 'W1Aw5X2aUA123123.jpg', 'https://www.ducati.com/us/en/bikes/panigale/959-panigale', '2019-01-06 00:00:46', '2019-01-06 00:00:46');
 
 -- --------------------------------------------------------
 
@@ -300,6 +286,7 @@ CREATE TABLE `user` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `dob` datetime NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -308,9 +295,15 @@ CREATE TABLE `user` (
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`id`, `id_role`, `name`, `email`, `password`, `dob`, `created_at`, `updated_at`) VALUES
-('1', '1', 'sysadmin', 'sysadmin@gmail.com', '123', '2018-07-10 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-('2', '2', 'collaborator', 'collaborator@gmail.com', '123', '2018-07-17 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `user` (`id`, `id_role`, `name`, `email`, `password`, `dob`, `remember_token`, `created_at`, `updated_at`) VALUES
+('1', '1', 'sysadmin', 'sysadmin@gmail.com', '123', '2018-07-10 00:00:00', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('2', '2', 'collaborator', 'collaborator@gmail.com', '123', '2018-07-17 00:00:00', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('3', '1', 'dulu', 'dulu@etcc.com', '123', '2019-01-01 00:00:00', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('Jll6c', '2', 'collaborator1', 'colla1@gmail.com', '$2y$10$R2tVX1sglej9tWhqeIj7Terf6WMVz564xuxCxVcgP/TB1/nhJFptm', '2019-01-01 00:00:00', 'hheaNCo8Hd3BoczppIdytFqtStT6PH66D3AtjTfrGawQFWp7ilojfPSiQlWl', '2019-01-09 06:38:55', '2019-01-09 06:38:55'),
+('nhiKa', '1', 'dulu1', 'dulu1', '$2y$10$JqhDeVy5fVdTkjzuJ1d9WOrchBX6ZfsNoudHIPZHWOVrAS3OHzN2K', '2019-01-01 00:00:00', '0', '2019-01-08 06:17:00', '2019-01-08 06:17:00'),
+('NKkXF', '4', 'user1', 'user1@gmail.com', '$2y$10$6iqLo.qeBdEsaksQn9dVHOcWd.G8Kk8FhhOqogShJJXixWd71POa2', '2019-01-01 00:00:00', NULL, '2019-01-09 06:39:17', '2019-01-09 06:39:17'),
+('UKBRN', '3', 'admin1', 'admin1@gmail.com', '$2y$10$FF0XmTFUQJD1YstdppT26.7ruMXsbB.0eJ8upEJK65PFVZNpytyEq', '2019-01-01 00:00:00', 'onsHTxovJ8WrtJO5vDEIqKUQFQDhdiEx3gmJvPoGZe4a361HRYX4UC0l0lUC', '2019-01-09 06:37:28', '2019-01-09 06:37:28'),
+('Z0o75', '1', 'dulu2', 'dulu2@etcc.com', '$2y$10$ZlERaTFSgoDuHr5U9uD..eAVDCgVcpu3WeRauiSWX9dzi34MAi73e', '2019-01-01 00:00:00', '8mr5ay2Np9Zhpvd2AmQlE5mFZseOY5hfEZzEi7RnKzrZp5iaNbRJhrk4Iz5e', '2019-01-08 06:17:34', '2019-01-08 06:17:34');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -321,13 +314,6 @@ INSERT INTO `user` (`id`, `id_role`, `name`, `email`, `password`, `dob`, `create
 --
 ALTER TABLE `activity`
   ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `activity_entity`
---
-ALTER TABLE `activity_entity`
-  ADD PRIMARY KEY (`id_activity`,`id_entity`),
-  ADD KEY `fk_activity_entity__entity` (`id_entity`);
 
 --
 -- Chỉ mục cho bảng `comment`
@@ -364,17 +350,18 @@ ALTER TABLE `motorbike_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `policy`
+--
+ALTER TABLE `policy`
+  ADD PRIMARY KEY (`id_role`,`id_activity`,`id_entity`),
+  ADD KEY `fk_policy__activity` (`id_activity`),
+  ADD KEY `fk_policy__entity` (`id_entity`);
+
+--
 -- Chỉ mục cho bảng `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `role_activity`
---
-ALTER TABLE `role_activity`
-  ADD PRIMARY KEY (`id_role`,`id_activity`),
-  ADD KEY `fk_role_activity__activity` (`id_activity`);
 
 --
 -- Chỉ mục cho bảng `slide`
@@ -394,13 +381,6 @@ ALTER TABLE `user`
 --
 
 --
--- Các ràng buộc cho bảng `activity_entity`
---
-ALTER TABLE `activity_entity`
-  ADD CONSTRAINT `fk_activity_entity__activity` FOREIGN KEY (`id_activity`) REFERENCES `activity` (`id`),
-  ADD CONSTRAINT `fk_activity_entity__entity` FOREIGN KEY (`id_entity`) REFERENCES `entity` (`id`);
-
---
 -- Các ràng buộc cho bảng `comment`
 --
 ALTER TABLE `comment`
@@ -415,11 +395,12 @@ ALTER TABLE `motorbike`
   ADD CONSTRAINT `fk_motorbike__motorbike_type` FOREIGN KEY (`id_motorbike_type`) REFERENCES `motorbike_type` (`id`);
 
 --
--- Các ràng buộc cho bảng `role_activity`
+-- Các ràng buộc cho bảng `policy`
 --
-ALTER TABLE `role_activity`
-  ADD CONSTRAINT `fk_role_activity__activity` FOREIGN KEY (`id_activity`) REFERENCES `activity` (`id`),
-  ADD CONSTRAINT `fk_role_activity__role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`);
+ALTER TABLE `policy`
+  ADD CONSTRAINT `fk_policy__activity` FOREIGN KEY (`id_activity`) REFERENCES `activity` (`id`),
+  ADD CONSTRAINT `fk_policy__entity` FOREIGN KEY (`id_entity`) REFERENCES `entity` (`id`),
+  ADD CONSTRAINT `fk_policy__role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`);
 
 --
 -- Các ràng buộc cho bảng `user`
