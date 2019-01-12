@@ -11,12 +11,12 @@
                     </div>
                 @endif
             </div>
-            <div class="row" style="margin-top: 10vh">
+            <div class="row" style="margin-top: 5vh">
                 <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 text-center">
                     <h1 style="font-size: 70px; font-weight: bold">WELCOME {{$current_user->name}}</h1>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3"></div>
-                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2"></div>
+                <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
                     <div class="panel panel-primary">
                         <div class="panel-heading">Information</div>
                         <div class="panel-body">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3"></div>
+                <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2"></div>
             </div>
         </div>
     </div>
