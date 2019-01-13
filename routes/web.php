@@ -151,4 +151,14 @@ Route::get("admin/login", "UserController@showLogin");
 Route::post("admin/login", "UserController@makeLogin");
 Route::get("admin/logout", "UserController@makeLogout");
 
+Route::group(
+    [
+
+    ],
+    function () {
+        $CONTROLLER_NAME = "ClientController@";
+        Route::get("home", $CONTROLLER_NAME . "showHomePage");
+    }
+);
+
 Auth::routes();

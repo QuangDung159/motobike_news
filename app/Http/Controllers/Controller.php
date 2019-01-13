@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manufacturer;
+use App\Models\MotorbikeType;
+use App\Models\Slide;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
-
-use App\Models\Entity;
 
 class Controller extends BaseController
 {
@@ -29,6 +29,7 @@ class Controller extends BaseController
         View::share("DELETE", "Delete");
 
         View::share("URL_ADMIN_ASSET", "asset/admin");
+        View::share("URL_CLIENT_ASSET", "asset/client");
         View::share("IMAGES_PATH", "upload/images");
 
         View::share("URL_ADMIN_MOTORBIKE_TYPE", "admin/motorbike_type");
@@ -51,5 +52,27 @@ class Controller extends BaseController
         View::share("URL_ADMIN_LOGIN", "admin/login");
         View::share("URL_ADMIN_DASHBOARD", "admin/dashboard");
         // End - Define constant to global using
+
+        $this->getListManufacturer();
+        $this->getListMotorbikeType();
+        $this->getListSlide();
+    }
+
+    public function getListManufacturer()
+    {
+        $list_manufacturer = Manufacturer::all();
+        View::share("list_manufacturer", $list_manufacturer);
+    }
+
+    public function getListMotorbikeType()
+    {
+        $list_motorbike_type = MotorbikeType::all();
+        View::share("list_motorbike_type", $list_motorbike_type);
+    }
+
+    public function getListSlide()
+    {
+        $list_slide = Slide::all();
+        View::share("list_slide", $list_slide);
     }
 }
