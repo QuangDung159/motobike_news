@@ -3,7 +3,7 @@
     <div class="col-md-9 ">
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color:#337AB7; color:white;">
-                <h4><b>{{$manufacturer->name}}</b></h4>
+                <h4><b>{{$manufacturer_name}} - {{$motorbike_type_name}}</b></h4>
             </div>
             @foreach($list_motorbike as $motorbike)
                 <div class="row-item row">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
     <meta name="author" content="">
-    <title>Admin - Khoa Phạm</title>
+    <title>Admin - Motorbike News</title>
     <base href="{{asset("")}}">
 
     <!-- Bootstrap Core CSS -->
@@ -19,12 +19,14 @@
     <link href="{{$URL_ADMIN_ASSET}}/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{{$URL_ADMIN_ASSET}}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{$URL_ADMIN_ASSET}}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
 
     <!-- DataTables CSS -->
     <link href="{{$URL_ADMIN_ASSET}}/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
           rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="{{$URL_ADMIN_ASSET}}/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="{{$URL_ADMIN_ASSET}}/bower_components/datatables-responsive/css/dataTables.responsive.css"
+          rel="stylesheet">
 </head>

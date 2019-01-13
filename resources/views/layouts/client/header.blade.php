@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <base href="{{asset("")}}">
 
-    <title>Laravel Khoa Pham</title>
+    <title>Motorbike News</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{$URL_CLIENT_ASSET}}/css/bootstrap.min.css" rel="stylesheet">

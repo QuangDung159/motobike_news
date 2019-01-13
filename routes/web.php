@@ -158,12 +158,13 @@ Route::group(
     function () {
         $CONTROLLER_NAME = "ClientController@";
         Route::get("home", $CONTROLLER_NAME . "showHomePage");
-        Route::get("{unsigned_title}/{id_motorbike}", $CONTROLLER_NAME . "showDetailPage");
-        Route::post("{unsigned_title}/{id_motorbike}/{id_user}", $CONTROLLER_NAME . "makeSubmitComment");
+        Route::get("motorbike/{unsigned_title}/{id_motorbike}", $CONTROLLER_NAME . "showDetailPage");
+        Route::get("manufacturer/{id_manufacturer}", $CONTROLLER_NAME . "showManufacturerPage");
+        Route::post("motorbike/{unsigned_title}/{id_motorbike}/{id_user}", $CONTROLLER_NAME . "makeSubmitComment");
         Route::get("login_user", $CONTROLLER_NAME . "showLoginPage");
         Route::post("login_user", $CONTROLLER_NAME . "makeLogin");
         Route::get("logout_user", $CONTROLLER_NAME . "makeLogout");
-        Route::get("manufacturer/{id_manufacturer}", $CONTROLLER_NAME . "showManufacturerPage");
+        Route::get("manufacturer/motorbike/{id_manufacturer}/{id_motorbike}", $CONTROLLER_NAME . "getListMotorbikeByManufacturerAndMotorbike");
     }
 );
 

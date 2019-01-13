@@ -27,7 +27,6 @@ class ClientController extends Controller
 
     public function showDetailPage($unsigned_title, $id_motorbike)
     {
-        Log::info("showDetailPage");
         $motorbike = Motorbike::find($id_motorbike);
         $list_comment = Comment::where("id_motorbike", $id_motorbike)
             ->orderBy("created_at", "desc")->get();
@@ -51,7 +50,6 @@ class ClientController extends Controller
 
     public function makeSubmitComment($unsigned_title, $id_motorbike, $id_user, Request $req)
     {
-        Log::info("makeSubmitComment");
         $this->validate($req,
             [
                 "comment" =>
@@ -73,13 +71,12 @@ class ClientController extends Controller
         $comment->id_motorbike = $id_motorbike;
         $comment->id_user = $id_user;
         $comment->save();
-        return redirect($unsigned_title . "/" . $id_motorbike)
+        return redirect("motorbike/" . $unsigned_title . "/" . $id_motorbike)
             ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.add_success"));
     }
 
     public function showLoginPage()
     {
-        Log::info("showLoginPage");
         return view($this->DIRECTORY_PAGE_CLIENT . ".login");
     }
 
@@ -112,13 +109,29 @@ class ClientController extends Controller
 
     public function showManufacturerPage($id_manufacturer)
     {
-        Log::info("showManufacturerPage");
+        $manufacturer = Manufacturer::find($id_manufacturer);
         $list_motorbike = Motorbike::where("id_manufacturer", $id_manufacturer)
             ->orderBy("updated_at", "desc")
             ->get();
         return view($this->DIRECTORY_PAGE_CLIENT . ".manufacturer",
             [
-                "list_motorbike" => $list_motorbike
+                "list_motorbike" => $list_motorbike,
+                "manufacturer" => $manufacturer
+            ]
+        );
+    }
+
+    public function getListMotorbikeByManufacturerAndMotorbike($id_manufacturer, $id_motorbike_type)
+    {
+        $list_motorbike = Motorbike::where("id_manufacturer", $id_manufacturer)
+            ->where("id_motorbike_type", $id_motorbike_type)->get();
+        $manufacturer_name = Manufacturer::find($id_manufacturer)->name;
+        $motorbike_type_name = MotorbikeType::find($id_motorbike_type)->name;
+        return view($this->DIRECTORY_PAGE_CLIENT . ".manufacturer_motorbike_type",
+            [
+                "list_motorbike" => $list_motorbike,
+                "manufacturer_name" => $manufacturer_name,
+                "motorbike_type_name" => $motorbike_type_name
             ]
         );
     }

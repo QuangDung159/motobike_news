@@ -4,12 +4,12 @@
         @foreach($list_ref as $motorbike)
             <div class="row" style="margin-top: 10px;">
                 <div class="col-md-5">
-                    <a href="detail.html">
+                    <a href="motorbike/{{$motorbike->unsigned_title}}/{{$motorbike->id}}">
                         <img class="img-responsive" src="{{$IMAGES_PATH}}/motorbike/{{$motorbike->thumbnail}}" alt="">
                     </a>
                 </div>
                 <div class="col-md-7">
-                    <a href="#"><b>{{$motorbike->title}}</b></a>
+                    <a href="motorbike/{{$motorbike->unsigned_title}}/{{$motorbike->id}}"><b>{{$motorbike->title}}</b></a>
                 </div>
                 <div class="module line-clamp">
                     <p>{{$motorbike->short_description}}</p>

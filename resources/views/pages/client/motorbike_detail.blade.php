@@ -45,7 +45,7 @@
                 <div class="well">
                     @if(isset($current_user))
                         <h4>Viết bình luận ...<span class="glyphicon glyphicon-pencil"></span></h4>
-                        <form action="{{$motorbike->unsigned_title}}/{{$motorbike->id}}/{{$current_user->id}}"
+                        <form action="motorbike/{{$motorbike->unsigned_title}}/{{$motorbike->id}}/{{$current_user->id}}"
                               method="post">
                             {{csrf_field()}}
                             <div class="form-group">

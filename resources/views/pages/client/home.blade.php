@@ -13,7 +13,7 @@
                             <h3>
                                 <a href="manufacturer/{{$manufacturer->id}}">{{$manufacturer->name}}</a> |
                                 @foreach($list_motorbike_type as $motorbike_type)
-                                    <small><a href="category.html"><i>{{$motorbike_type->name}}</i></a>/</small>
+                                    <small><a href="manufacturer/motorbike/{{$manufacturer->id}}/{{$motorbike_type->id}}"><i>{{$motorbike_type->name}}</i></a>/</small>
                                 @endforeach
                             </h3>
                             <div class="col-md-8 border-right">
@@ -31,14 +31,15 @@
                                     <p>
                                         {{$motorbike["short_description"]}}
                                     </p>
-                                    <a class="btn btn-primary" href="{{$motorbike->unsigned_title}}/{{$motorbike->id}}">See
+                                    <a class="btn btn-primary"
+                                       href="motorbike/{{$motorbike->unsigned_title}}/{{$motorbike->id}}">See
                                         Detail
                                         <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
-                                <?php $list_motorbike = $manufacturer->motorbikes->sortByDesc("views")->take(4)?>
+                                <?php $list_motorbike = $manufacturer->motorbikes->sortByDesc("views")->take(2)?>
                                 @foreach($list_motorbike as $motorbike)
                                     <div class="row" style="margin-top: 10px;">
                                         <div class="col-md-5">
@@ -48,7 +49,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md-7">
-                                            <a href="{{$motorbike->unsigned_title}}/{{$motorbike->id}}"><b>{{$motorbike->title}}</b></a>
+                                            <a href="motorbike/{{$motorbike->unsigned_title}}/{{$motorbike->id}}"><b>{{$motorbike->title}}</b></a>
                                         </div>
                                         <div class="break"></div>
                                     </div>
