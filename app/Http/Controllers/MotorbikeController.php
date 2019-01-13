@@ -51,7 +51,7 @@ class MotorbikeController extends Controller
     {
         $this->validate($req,
             [
-                "motorbike_name" => "required|min:3|max:100|unique:motorbike,name",
+                "motorbike_name" => "required|min:3|max:100",
                 "capacity" => "required|min:3|max:100|",
                 "id_motorbike_type" => "required",
                 "id_manufacturer" => "required",
@@ -62,7 +62,6 @@ class MotorbikeController extends Controller
                 "motorbike_name.required" => "Please provide Motorbike name",
                 "motorbike_name.min" => "The Motorbike name is 3 to 100 characters long",
                 "motorbike_name.max" => "The Motorbike name is 3 to 100 characters long",
-                "motorbike_name.unique" => "The Motorbike name already exists",
 
                 "capacity.required" => "Please provide Capacity number",
                 "capacity.min" => "The Capacity number is 3 to 100 characters long",

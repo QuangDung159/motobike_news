@@ -9,7 +9,7 @@
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <div class="col-lg-7" style="padding-bottom:120px">
+                <div class="col-lg-12" style="padding-bottom:120px">
                     <form action="{{$URL_ADMIN_MOTORBIKE}}/add" method="POST" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="notification">
@@ -96,6 +96,9 @@
     </div>
 @endsection
 
+@section("style")
+@endsection
+
 @section("script")
     <script>
         {{-- get path of file that you want to upload --}}
@@ -126,5 +129,12 @@
                 readPath(this)
             }
         );
+    </script>
+
+    <script>
+        CKEDITOR.replace('demo', {
+            height: ['700px']
+        });
+
     </script>
 @endsection
