@@ -11,27 +11,27 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Manufacturer
- * 
+ *
  * @property string $id
  * @property string $name
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * 
+ *
  * @property \Illuminate\Database\Eloquent\Collection $motorbikes
  *
  * @package App\Models
  */
 class Manufacturer extends Eloquent
 {
-	protected $table = 'manufacturer';
-	public $incrementing = false;
+    protected $table = 'manufacturer';
+    public $incrementing = false;
 
-	protected $fillable = [
-		'name'
-	];
+    protected $fillable = [
+        'name'
+    ];
 
-	public function motorbikes()
-	{
-		return $this->hasMany(\App\Models\Motorbike::class, 'id_manufacturer');
-	}
+    public function motorbikes()
+    {
+        return $this->hasMany(\App\Models\Motorbike::class, 'id_manufacturer');
+    }
 }

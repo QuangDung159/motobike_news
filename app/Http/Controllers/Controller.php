@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manufacturer;
+use App\Models\Motorbike;
 use App\Models\MotorbikeType;
 use App\Models\Slide;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -62,17 +63,20 @@ class Controller extends BaseController
     {
         $list_manufacturer = Manufacturer::all();
         View::share("list_manufacturer", $list_manufacturer);
+        return $list_manufacturer;
     }
 
     public function getListMotorbikeType()
     {
         $list_motorbike_type = MotorbikeType::all();
         View::share("list_motorbike_type", $list_motorbike_type);
+        return $list_motorbike_type;
     }
 
     public function getListSlide()
     {
         $list_slide = Slide::all();
         View::share("list_slide", $list_slide);
+        return $list_slide;
     }
 }
