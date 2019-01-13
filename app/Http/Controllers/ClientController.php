@@ -9,6 +9,7 @@ use App\Models\MotorbikeType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 
 class ClientController extends Controller
 {
@@ -31,7 +32,12 @@ class ClientController extends Controller
         $list_comment = Comment::where("id_motorbike", $id_motorbike)
             ->orderBy("created_at", "desc")->get();
         if (isset($motorbike)) {
-            Log::info("motorbike ID : " . $motorbike->id);
+            $list_highlights = Motorbike::orderBy("views", "desc")->take(4)->get();
+            $list_ref = Motorbike::where("id_manufacturer", $motorbike->id_manufacturer)
+                ->where("id", "!=", "$id_motorbike")
+                ->orderBy("views", "desc")->take(4)->get();
+            View::share("list_highlights", $list_highlights);
+            View::share("list_ref", $list_ref);
             return view($this->DIRECTORY_PAGE_CLIENT . ".motorbike_detail",
                 [
                     "motorbike" => $motorbike,

@@ -40,12 +40,18 @@
                             <div class="col-md-4">
                                 <?php $list_motorbike = $manufacturer->motorbikes->sortByDesc("views")->take(4)?>
                                 @foreach($list_motorbike as $motorbike)
-                                    <a href="{{$motorbike->unsigned_title}}/{{$motorbike->id}}">
-                                        <h4>
-                                            <span class="glyphicon glyphicon-list-alt"></span>
-                                            {{$motorbike->short_description}}
-                                        </h4>
-                                    </a>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-5">
+                                            <a href="{{$motorbike->unsigned_title}}/{{$motorbike->id}}">
+                                                <img class="img-responsive"
+                                                     src="{{$IMAGES_PATH}}/motorbike/{{$motorbike->thumbnail}}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <a href="{{$motorbike->unsigned_title}}/{{$motorbike->id}}"><b>{{$motorbike->title}}</b></a>
+                                        </div>
+                                        <div class="break"></div>
+                                    </div>
                                 @endforeach
                             </div>
                             <div class="break"></div>
