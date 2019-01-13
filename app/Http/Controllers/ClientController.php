@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Manufacturer;
 use App\Models\Motorbike;
 use App\Models\MotorbikeType;
@@ -33,11 +34,13 @@ class ClientController extends Controller
     {
         Log::info("showDetailPage");
         $motorbike = Motorbike::find($id_motorbike);
+        $list_comment = Comment::where("id_motorbike", $id_motorbike)->get();
         if (isset($motorbike)) {
             Log::info("motorbike ID : " . $motorbike->id);
             return view($this->DIRECTORY_PAGE_CLIENT . ".motorbike_detail",
                 [
-                    "motorbike" => $motorbike
+                    "motorbike" => $motorbike,
+                    "list_comment" => $list_comment
                 ]
             );
         } else {
