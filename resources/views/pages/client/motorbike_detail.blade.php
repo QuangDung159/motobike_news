@@ -2,6 +2,28 @@
 @section("main_content")
     <div class="container">
         <div class="row">
+            <div class="notification">
+                @if(session("success"))
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{session("success")}}
+                    </div>
+                @endif
+                @if(session("error"))
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{session("error")}}
+                    </div>
+                @endif
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $item)
+                            {{$item}}<br>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
             <div class="col-lg-9">
 
                 <!-- Blog Post -->
@@ -21,52 +43,38 @@
 
                 <!-- Comments Form -->
                 <div class="well">
-                    <h4>Viết bình luận ...<span class="glyphicon glyphicon-pencil"></span></h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Gửi</button>
-                    </form>
+                    @if(isset($current_user))
+                        <h4>Viết bình luận ...<span class="glyphicon glyphicon-pencil"></span></h4>
+                        <form action="{{$motorbike->unsigned_title}}/{{$motorbike->id}}/{{$current_user->id}}"
+                              method="post">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <textarea name="comment" class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gửi</button>
+                        </form>
+                    @else
+                        <h4>Please <a href="login_user" style="font-weight: bold">login</a> to leave comment</h4>
+                    @endif
                 </div>
 
                 <hr>
 
                 <!-- Posted Comments -->
 
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
-                        commodo.
-                        Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                        nisi
-                        vulputate fringilla. Donec lacinia congue felis in faucibus.
+                @foreach($list_comment as $comment)
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{$comment->user->name}}
+                                <small>{{$comment->created_at}}</small>
+                            </h4>
+                            {{$comment->content}}
+                        </div>
                     </div>
-                </div>
-
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
-                        commodo.
-                        Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                        nisi
-                        vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="col-md-3">
                 @include("pages.client.ref_news")
