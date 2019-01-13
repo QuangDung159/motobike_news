@@ -11,7 +11,7 @@
                         <?php $motorbike = $manufacturer->motorbikes->sortByDesc("updated_at")->first()?>
                         <div class="row-item row">
                             <h3>
-                                <a href="category.html">{{$manufacturer->name}}</a> |
+                                <a href="manufacturer/{{$manufacturer->id}}">{{$manufacturer->name}}</a> |
                                 @foreach($list_motorbike_type as $motorbike_type)
                                     <small><a href="category.html"><i>{{$motorbike_type->name}}</i></a>/</small>
                                 @endforeach

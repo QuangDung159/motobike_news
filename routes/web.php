@@ -163,6 +163,7 @@ Route::group(
         Route::get("login_user", $CONTROLLER_NAME . "showLoginPage");
         Route::post("login_user", $CONTROLLER_NAME . "makeLogin");
         Route::get("logout_user", $CONTROLLER_NAME . "makeLogout");
+        Route::get("manufacturer/{id_manufacturer}", $CONTROLLER_NAME . "showManufacturerPage");
     }
 );
 

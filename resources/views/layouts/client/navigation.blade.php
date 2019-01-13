@@ -32,7 +32,7 @@
             <ul class="nav navbar-nav pull-right">
                 @if(isset($current_user))
                     <li>
-                        <a>
+                        <a href="">
                             <span class="glyphicon glyphicon-user"></span>
                             {{$current_user->name}}
                         </a>

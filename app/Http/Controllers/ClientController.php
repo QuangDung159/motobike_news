@@ -109,4 +109,17 @@ class ClientController extends Controller
         Auth::logout();
         return redirect($this->URL_PAGE_HOME);
     }
+
+    public function showManufacturerPage($id_manufacturer)
+    {
+        Log::info("showManufacturerPage");
+        $list_motorbike = Motorbike::where("id_manufacturer", $id_manufacturer)
+            ->orderBy("updated_at", "desc")
+            ->get();
+        return view($this->DIRECTORY_PAGE_CLIENT . ".manufacturer",
+            [
+                "list_motorbike" => $list_motorbike
+            ]
+        );
+    }
 }

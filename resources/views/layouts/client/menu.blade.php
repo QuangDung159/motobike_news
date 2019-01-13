@@ -10,7 +10,7 @@
             <ul>
                 @foreach($list_motorbike_type as $motorbike_type)
                     <li class="list-group-item">
-                        <a href="#">{{$motorbike_type->name}}</a>
+                        <a href="">{{$motorbike_type->name}}</a>
                     </li>
                 @endforeach
             </ul>
