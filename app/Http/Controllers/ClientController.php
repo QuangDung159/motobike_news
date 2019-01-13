@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manufacturer;
+use App\Models\Motorbike;
 use App\Models\MotorbikeType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -25,5 +27,21 @@ class ClientController extends Controller
     public function showHomePage()
     {
         return view($this->DIRECTORY_PAGE_CLIENT . ".home");
+    }
+
+    public function showDetailPage($unsigned_title, $id_motorbike)
+    {
+        Log::info("showDetailPage");
+        $motorbike = Motorbike::find($id_motorbike);
+        if (isset($motorbike)) {
+            Log::info("motorbike ID : " . $motorbike->id);
+            return view($this->DIRECTORY_PAGE_CLIENT . ".motorbike_detail",
+                [
+                    "motorbike" => $motorbike
+                ]
+            );
+        } else {
+            return redirect($this->URL_PAGE_HOME);
+        }
     }
 }

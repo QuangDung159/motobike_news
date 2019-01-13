@@ -39,7 +39,7 @@
                             <div class="col-md-4">
                                 <?php $list_motorbike = $manufacturer->motorbikes->sortByDesc("views")->take(4)?>
                                 @foreach($list_motorbike as $motorbike)
-                                    <a href="detail.html">
+                                    <a href="{{$motorbike->unsigned_title}}/{{$motorbike->id}}">
                                         <h4>
                                             <span class="glyphicon glyphicon-list-alt"></span>
                                             {{$motorbike->short_description}}

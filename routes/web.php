@@ -158,6 +158,7 @@ Route::group(
     function () {
         $CONTROLLER_NAME = "ClientController@";
         Route::get("home", $CONTROLLER_NAME . "showHomePage");
+        Route::get("{unsigned_title}/{id_motorbike}", $CONTROLLER_NAME . "showDetailPage");
     }
 );
 
