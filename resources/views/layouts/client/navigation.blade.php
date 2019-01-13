@@ -44,7 +44,7 @@
                 </li>
 
                 <li>
-                    <a href="#">Đăng xuất</a>
+                    <a href="logout_user">Logout</a>
                 </li>
 
             </ul>

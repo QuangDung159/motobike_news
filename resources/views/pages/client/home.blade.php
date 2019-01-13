@@ -31,8 +31,9 @@
                                     <p>
                                         {{$motorbike["short_description"]}}
                                     </p>
-                                    <a class="btn btn-primary" href="detail.html">See Detail <span
-                                                class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <a class="btn btn-primary" href="{{$motorbike->unsigned_title}}/{{$motorbike->id}}">See
+                                        Detail
+                                        <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
                             </div>
 

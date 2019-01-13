@@ -15,7 +15,6 @@
     <div class="space20"></div>
     <div class="row main-left">
         @include("layouts.client.menu")
-
         @yield("content")
     </div>
     <!-- /.row -->
