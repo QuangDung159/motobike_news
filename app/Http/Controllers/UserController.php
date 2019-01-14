@@ -164,6 +164,8 @@ class UserController extends Controller
                     "user_dob.required" => "Please provide User birthday"
                 ]
             );
+
+            // User::where("id", $id)->get();
             $user[0]->name = $req->user_name;
             $user[0]->dob = $req->user_dob;
             $user[0]->id_role = $req->id_role;

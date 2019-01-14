@@ -11,6 +11,7 @@ return [
             "add_success" => "Add successfully",
             "update_success" => "Update successfully",
             "delete_success" => "Delete successfully",
+            "register_success" => "Register successfully. Please login."
         ],
     "error" =>
         [

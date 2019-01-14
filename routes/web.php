@@ -165,6 +165,8 @@ Route::group(
         Route::post("login_user", $CONTROLLER_NAME . "makeLogin");
         Route::get("logout_user", $CONTROLLER_NAME . "makeLogout");
         Route::get("manufacturer/motorbike/{id_manufacturer}/{id_motorbike}", $CONTROLLER_NAME . "getListMotorbikeByManufacturerAndMotorbike");
+        Route::get("register_user", $CONTROLLER_NAME . "showRegisterPage");
+        Route::post("register_user", $CONTROLLER_NAME . "makeRegisterUser");
     }
 );
 

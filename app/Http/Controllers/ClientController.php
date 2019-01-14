@@ -6,10 +6,13 @@ use App\Models\Comment;
 use App\Models\Manufacturer;
 use App\Models\Motorbike;
 use App\Models\MotorbikeType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
@@ -75,8 +78,16 @@ class ClientController extends Controller
             ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.add_success"));
     }
 
+    public function getPreviousUrl()
+    {
+        $links = session()->has('links') ? session('links') : [];
+        array_unshift($links, URL::previous()); // Putting it in the beginning of links array
+        session(['links' => $links]); // Saving links array to the session
+    }
+
     public function showLoginPage()
     {
+        $this->getPreviousUrl();
         return view($this->DIRECTORY_PAGE_CLIENT . ".login");
     }
 
@@ -94,7 +105,7 @@ class ClientController extends Controller
         );
         $credentials = $req->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect($this->URL_PAGE_HOME);
+            return redirect(session('links')[1]);
         } else {
             return redirect($this->URL_PAGE_LOGIN)
                 ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.login_fail"));
@@ -104,7 +115,7 @@ class ClientController extends Controller
     public function makeLogout()
     {
         Auth::logout();
-        return redirect($this->URL_PAGE_HOME);
+        return redirect(URL::previous());
     }
 
     public function showManufacturerPage($id_manufacturer)
@@ -124,7 +135,7 @@ class ClientController extends Controller
     public function getListMotorbikeByManufacturerAndMotorbike($id_manufacturer, $id_motorbike_type)
     {
         $list_motorbike = Motorbike::where("id_manufacturer", $id_manufacturer)
-            ->where("id_motorbike_type", $id_motorbike_type)->get();
+            ->where("id_motorbike_type", $id_motorbike_type)->paginate(5);
         $manufacturer_name = Manufacturer::find($id_manufacturer)->name;
         $motorbike_type_name = MotorbikeType::find($id_motorbike_type)->name;
         return view($this->DIRECTORY_PAGE_CLIENT . ".manufacturer_motorbike_type",
@@ -134,5 +145,64 @@ class ClientController extends Controller
                 "motorbike_type_name" => $motorbike_type_name
             ]
         );
+    }
+
+    public function showRegisterPage()
+    {
+        // Register previous url to session
+        $this->getPreviousUrl();
+        return view($this->DIRECTORY_PAGE_CLIENT . ".register");
+    }
+
+    public function makeRegisterUser(Request $req)
+    {
+        $this->validate($req,
+            [
+                "user_name" =>
+                    [
+                        "required",
+                        "max:100",
+                        "min:3"
+                    ],
+                "user_email" =>
+                    [
+                        "required",
+                        "max:100",
+                        "min:3",
+                        "unique:User,email"
+                    ],
+                "password" => "required",
+                "re_password" => "required|same:password",
+                "user_dob" => "required"
+            ],
+            [
+                "user_name.required" => "Please provide User name",
+                "user_name.min" => "The user name is 3 to 100 characters long",
+                "user_name.max" => "The user name is 3 to 100 characters long",
+
+                "user_email.required" => "Please provide User email",
+                "user_email.min" => "The user email is 3 to 100 characters long",
+                "user_email.max" => "The user email is 3 to 100 characters long",
+                "user_email.unique" => "The User email already exists",
+
+                "password.required" => "Please provide Password",
+
+                "re_password.same" => "The Re-Password does not match with New Password",
+
+                "user_dob.required" => "Please provide User birthday"
+            ]
+        );
+
+        $user = new User();
+        $user->id = str_random(5);
+        $user->name = $req->user_name;
+        $user->email = $req->user_email;
+        $user->dob = $req->user_dob;
+        $user->id_role = 4;
+        $user->password = bcrypt($req->password);
+        $user->save();
+        Log::info(session('links')[1]);
+        return redirect($this->URL_PAGE_LOGIN)
+            ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.register_success"));
     }
 }

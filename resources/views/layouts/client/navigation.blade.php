@@ -42,7 +42,7 @@
                     </li>
                 @else
                     <li>
-                        <a href="#">Register</a>
+                        <a href="register_user">Register</a>
                     </li>
                     <li>
                         <a href="login_user">Login</a>
