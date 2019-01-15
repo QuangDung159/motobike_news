@@ -23,13 +23,33 @@ class ClientController extends Controller
     private $URL_PAGE_LOGIN = "login_user";
     private $PATH_CONFIG_CONSTANT = "constant";
 
+    public function addLinkToSession($link)
+    {
+        Log::info("addLinkToSession");
+        if ($link != "http://localhost:8090/motobike_news/public/login_user" && $link != "http://localhost:8090/motobike_news/public/register_user") {
+            $links = session()->has('links') ? session('links') : [];
+            array_unshift($links, $link); // Putting it in the beginning of links array
+            session(['links' => $links]); // Saving links array to the session
+            $count = count(session("links"));
+            foreach (session("links") as $link) {
+                if ($count > 10) {
+                    array_pop($links);
+                }
+                $count--;
+            }
+            session(['links' => $links]);
+        }
+    }
+
     public function showHomePage()
     {
+        $this->addLinkToSession(URL::current());
         return view($this->DIRECTORY_PAGE_CLIENT . ".home");
     }
 
     public function showDetailPage($unsigned_title, $id_motorbike)
     {
+        $this->addLinkToSession(URL::current());
         $motorbike = Motorbike::find($id_motorbike);
         $list_comment = Comment::where("id_motorbike", $id_motorbike)
             ->orderBy("created_at", "desc")->get();
@@ -78,16 +98,8 @@ class ClientController extends Controller
             ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.add_success"));
     }
 
-    public function getPreviousUrl()
-    {
-        $links = session()->has('links') ? session('links') : [];
-        array_unshift($links, URL::previous()); // Putting it in the beginning of links array
-        session(['links' => $links]); // Saving links array to the session
-    }
-
     public function showLoginPage()
     {
-        $this->getPreviousUrl();
         return view($this->DIRECTORY_PAGE_CLIENT . ".login");
     }
 
@@ -105,7 +117,7 @@ class ClientController extends Controller
         );
         $credentials = $req->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect(session('links')[1]);
+            return redirect(session("links")[2]);
         } else {
             return redirect($this->URL_PAGE_LOGIN)
                 ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.login_fail"));
@@ -134,6 +146,7 @@ class ClientController extends Controller
 
     public function getListMotorbikeByManufacturerAndMotorbike($id_manufacturer, $id_motorbike_type)
     {
+        $this->addLinkToSession(URL::current());
         $list_motorbike = Motorbike::where("id_manufacturer", $id_manufacturer)
             ->where("id_motorbike_type", $id_motorbike_type)->paginate(5);
         $manufacturer_name = Manufacturer::find($id_manufacturer)->name;
@@ -149,8 +162,6 @@ class ClientController extends Controller
 
     public function showRegisterPage()
     {
-        // Register previous url to session
-        $this->getPreviousUrl();
         return view($this->DIRECTORY_PAGE_CLIENT . ".register");
     }
 
@@ -201,7 +212,6 @@ class ClientController extends Controller
         $user->id_role = 4;
         $user->password = bcrypt($req->password);
         $user->save();
-        Log::info(session('links')[1]);
         return redirect($this->URL_PAGE_LOGIN)
             ->with("success", config($this->PATH_CONFIG_CONSTANT . ".success.register_success"));
     }
