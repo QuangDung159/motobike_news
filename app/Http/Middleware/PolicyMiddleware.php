@@ -68,6 +68,8 @@ class PolicyMiddleware
                                                       FROM policy p, entity e, activity a, role r 
                                                       WHERE p.id_activity = a.id and p.id_entity = e.id 
                                                       and p.id_role = r.id and p.id_role = " . $user->id_role . " and p.id_entity = " . $entity->id);
+
+                        // http://localhost/motobike_news/public/admin/user/add -> segment(3) == add
                         Log::info(strtolower($request->segment(3)));
                         foreach ($list_activity as $activity) {
                             if (strtolower($activity->acitvity_name) == strtolower($request->segment(3))) {

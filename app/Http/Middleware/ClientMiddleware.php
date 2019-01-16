@@ -20,8 +20,13 @@ class ClientMiddleware
     {
         Log::info("ClientMiddleware");
         if (Auth::check()) {
-            $user = Auth::user();
-            View::share("current_user", $user);
+            if ($request->fullUrl() == "http://localhost/motobike_news/public/login_user"
+                || $request->fullUrl() == "http://localhost/motobike_news/public/register_user") {
+                return redirect("home");
+            } else {
+                $user = Auth::user();
+                View::share("current_user", $user);
+            }
         }
         return $next($request);
     }

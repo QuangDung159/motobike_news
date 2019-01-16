@@ -25,6 +25,6 @@ return [
         ],
     "notification" =>
         [
-            "no_permission" => "Sorry! You don't have permission to do this action. Please check with your Administrator"
+            "no_permission" => "Sorry! You don't have permission to do this action. Please check with your Administrator."
         ]
 ];

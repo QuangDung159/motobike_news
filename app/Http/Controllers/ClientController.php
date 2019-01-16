@@ -7,6 +7,7 @@ use App\Models\Manufacturer;
 use App\Models\Motorbike;
 use App\Models\MotorbikeType;
 use App\Models\User;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -26,16 +27,21 @@ class ClientController extends Controller
     public function addLinkToSession($link)
     {
         Log::info("addLinkToSession");
+        Log::info("Current : " . $link);
+
+        // Do not add links below to session
         if ($link != "http://localhost:8090/motobike_news/public/login_user" && $link != "http://localhost:8090/motobike_news/public/register_user") {
             $links = session()->has('links') ? session('links') : [];
-            array_unshift($links, $link); // Putting it in the beginning of links array
+
+            // If first link in session == current link -> do not add
+            if ($link != $links[0]) {
+                array_unshift($links, $link); // Putting it in the beginning of links array
+            }
             session(['links' => $links]); // Saving links array to the session
-            $count = count(session("links"));
-            foreach (session("links") as $link) {
-                if ($count > 10) {
-                    array_pop($links);
-                }
-                $count--;
+
+            // Limit quantity of element of link in session links
+            if (count(session("links")) > 10) {
+                array_pop($links);
             }
             session(['links' => $links]);
         }
@@ -117,7 +123,7 @@ class ClientController extends Controller
         );
         $credentials = $req->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect(session("links")[2]);
+            return redirect(session("links")[0]);
         } else {
             return redirect($this->URL_PAGE_LOGIN)
                 ->with("error", config($this->PATH_CONFIG_CONSTANT . ".error.login_fail"));

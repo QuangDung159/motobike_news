@@ -5,7 +5,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.html">Admin Area - Khoa Phạm</a>
+    <a class="navbar-brand" href="index.html">Admin Area - Motorbike News</a>
 </div>
 <!-- /.navbar-header -->
 
@@ -37,5 +37,3 @@
     </li>
     <!-- /.dropdown -->
 </ul>
-<!-- /.navbar-top-links -->
-<!-- /.navbar-static-side -->
