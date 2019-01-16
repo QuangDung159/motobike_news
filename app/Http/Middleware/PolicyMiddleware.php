@@ -67,7 +67,7 @@ class PolicyMiddleware
                         $list_activity = DB::select("SELECT r.name as role_name, e.name as entity_name, a.name as acitvity_name 
                                                       FROM policy p, entity e, activity a, role r 
                                                       WHERE p.id_activity = a.id and p.id_entity = e.id 
-                                                      and p.id_role = r.id and p.id_role = " . $user->id_role . " and p.id_entity = " . $entity->id);
+                                                      and p.id_role = r.id and p.id_role = " . $user->id_role . " and p.id_entity = '" . $entity->id . "'");
 
                         // http://localhost/motobike_news/public/admin/user/add -> segment(3) == add
                         Log::info(strtolower($request->segment(3)));

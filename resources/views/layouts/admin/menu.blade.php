@@ -33,23 +33,6 @@
                     <!-- /.nav-second-level -->
                 </li>
             @endforeach
-
-            @if($current_user->id_role == 1)
-                <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Policy<span
-                                class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="{{$ADMIN}}/policy/{{$LIST}}">List Policy</a>
-                        </li>
-                        <li>
-                            {{-- admin/motorbike_type/add --}}
-                            <a href="{{$ADMIN}}/policy/{{$ADD}}">Add Policy</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-            @endif
             <li>
                 <a href="#"><i class="fa fa-users fa-fw"></i> Setting<span
                             class="fa arrow"></span></a>
