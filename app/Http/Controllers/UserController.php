@@ -127,7 +127,7 @@ class UserController extends Controller
     public function makeUpdate(Request $req, $id)
     {
         $user = User::where("id", $id)->get();
-        if (count($user[0]) > 0) {
+        if (count($user) > 0) {
             $this->validate($req,
                 [
                     "user_name" =>
