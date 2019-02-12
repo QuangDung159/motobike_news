@@ -168,8 +168,6 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
-        Way\Generators\GeneratorsServiceProvider::class,
-        Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
 
         /*
          * Application Service Providers...
