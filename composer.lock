@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "347ab45002f3289dde7d8c64e2734112",
+    "content-hash": "0fab63f99f89a7c0bdf354b0879928fe",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1152,7 +1152,7 @@
         },
         {
             "name": "orangehill/iseed",
-            "version": "v2.6.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orangehill/iseed.git",
@@ -4132,7 +4132,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "orangehill/iseed": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
