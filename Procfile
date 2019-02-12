@@ -1,1 +1,1 @@
-web: vendor/bin/motorbike_news public/ 
+web: vendor/bin/motorbike_news public/home
