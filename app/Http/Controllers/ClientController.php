@@ -34,8 +34,12 @@ class ClientController extends Controller
             $links = session()->has('links') ? session('links') : [];
 
             // If first link in session == current link -> do not add
-            if ($link != $links[0]) {
-                array_unshift($links, $link); // Putting it in the beginning of links array
+            if (count($links) != 0) {
+                if ($link != $links[0]) {
+                    array_unshift($links, $link); // Putting it in the beginning of links array
+                }
+            } else {
+                array_unshift($links, $link);
             }
             session(['links' => $links]); // Saving links array to the session
 
