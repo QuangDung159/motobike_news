@@ -7,13 +7,11 @@ use App\Models\Manufacturer;
 use App\Models\Motorbike;
 use App\Models\MotorbikeType;
 use App\Models\User;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
